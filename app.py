@@ -304,7 +304,7 @@ def makeLinesSignal():
     print(f"tick recieved: {tick}")
     # You can have tick validation before moving ahead, if it's invalid tick then return error on UI
 
-    df = consolidateSignals("PLUG")
+    df = consolidateSignals(tick)
 
     fig = make_subplots(rows=7, cols=1,
                         shared_xaxes=True,

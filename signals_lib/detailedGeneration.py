@@ -91,7 +91,7 @@ def getData(tick):
     if tick in NASDAQ_LIST:
         stockExchange = "NASDAQ"
     else:
-        stockExchange = "NASDAQ"
+        stockExchange = "NYSE"
 
 
     print(f'Getting tick data from RDS (stock exchange: {stockExchange}). . .')
