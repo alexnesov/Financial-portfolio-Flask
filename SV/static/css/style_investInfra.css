@@ -1,0 +1,58 @@
+
+@media only screen and (max-width: 600px) {
+#investInfra_page{
+padding-top: 100px;
+padding-left: 0%;
+padding-right: 0%;
+}
+}
+
+
+@media only screen and (max-width: 6000px) {
+#investInfra_page{
+padding-top: 100px;
+padding-right: 2%;
+padding-left: 280px;
+}
+}
+
+
+@font-face{
+src: url(../fonts/Roboto-Light.ttf);
+font-family: Roboto;
+}
+
+
+h3 {
+color:rgba(0, 132, 255, 0.952) !important;
+font-family: Roboto;
+} 
+
+.DBs {
+text-align: center;
+}
+
+hr.solid {
+border-top: 3px solid rgb(0, 0, 0);
+}
+
+img {
+display: block;
+margin-left: auto;
+margin-right: auto;
+}
+
+
+.card, .card-body, .card-footer, .card-header{
+  border-radius:.800rem !important;
+}
+
+/* top-left | top-right | bottom-right | bottom-left */
+.card-header{
+  background-color: white;
+  border-radius: .800rem .800rem 0rem 0rem !important;
+}
+
+.card-footer{
+  border-radius: 0rem 0rem .800rem .800rem !important;
+}

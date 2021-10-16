@@ -1,0 +1,95 @@
+{%extends "base.html"%}
+{%block content%}
+
+<head>
+  <link href="../static/css/style_ownership.css" rel="stylesheet" type="text/css">
+  <title>GTS-Table</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+  <script src="../static/JS/ownership.js" defer></script>
+
+</head>
+
+
+<body id="Technicals_page" style="background-color: #f3f6fd;">
+
+    <h3>Ownership</h3>
+
+    <div class="card mb-3 shadow bg-white rounded">
+      <div class="card-header">
+        Historic data
+      </div>
+    <div class="card-body">
+
+    <form class="form-inline" method="post">
+      <div class="form-group mx-sm-3 mb-2">
+          {{ form.stock(class="form-control")}}
+      </div>
+      <button type="submit" class="btn btn-primary mb-2">Confirm</button>
+    </form>
+
+
+
+
+<div class="chart" id="plot">
+  <script>
+    var graphs = {{plot | safe}};
+    Plotly.plot('plot',graphs,{});
+  </script>
+</div>
+
+
+    <div class="table-wrapper-scroll-y my-custom-scrollbar" >
+
+      <table style=max-width:100>
+        <thead class="thead">
+          <th scope="col">No</th>
+          <th scope="col">Ticker</th>
+          <th scope="col">MarketCap</th>
+          <th scope="col">SharesOutstanding</th>
+          <th scope="col">SharesFloat</th>
+          <th scope="col">InsiderOwnership</th>
+          <th scope="col">InsiderTransact.</th>
+          <th scope="col">Inst.Ownership</th>
+          <th scope="col">Inst.Transact.</th>
+          <th scope="col">FloatShort</th>
+          <th scope="col">ShortRatio</th>
+          <th scope="col">Avg.Volume</th>
+          <th scope="col">Price</th>
+          <th scope="col">Change</th>
+          <th scope="col">Volume</th>
+          <th scope="col">Date</th>
+        
+        </thead>
+        {% for item in items %}
+        <tr>
+          <td>{{ item[0] }}</td>
+          <td>{{ item[1] }}</td>
+          <td>{{ item[2] }}</td>
+          <td>{{ item[3] }}</td>
+          <td>{{ item[4] }}</td>
+          <td>{{ item[5] }}</td>
+          <td>{{ item[6] }}</td>
+          <td>{{ item[7] }}</td>
+          <td>{{ item[8] }}</td>
+          <td>{{ item[9] }}</td>
+          <td>{{ item[10] }}</td>
+          <td>{{ item[11] }}</td>
+          <td>{{ item[12] }}</td>
+          <td>{{ item[13] }}</td>
+          <td>{{ item[14] }}</td>
+          <td>{{ item[15] }}</td>
+      
+        </tr>
+        {% endfor %}
+      </table>
+      
+    </div>
+    </div>
+</body>
+
+{% include "base_dashboard.html" %}
+
+{%endblock%}
