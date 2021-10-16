@@ -1,7 +1,8 @@
 
 from utils.db_manage import QuRetType, std_db_acc_obj
+from signals_lib.ta import aroon, rsi
 
-import sys, talib
+import sys
 import pandas as pd
 from datetime import datetime, timedelta 
 from time import strftime
@@ -49,9 +50,11 @@ def SignalDetection(df):
     low                 = df["Low"].to_numpy()
 
     # Aroon
-    aroonDOWN, aroonUP  = talib.AROON(high=high, low=low,timeperiod=Aroonval)  ####
+    aroonUP, aroonDOWN = aroon(df, Aroonval)
+    
     # RSI
-    ind_rsi             = talib.RSI(close, timeperiod=timePeriodRSI)
+    ind_rsi             = rsi(df, timePeriodRSI)
+    print(ind_rsi)
 
     df['RSI']           = ind_rsi
     df['Aroon Down']    = aroonDOWN

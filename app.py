@@ -297,6 +297,7 @@ def getCSV():
 def makeLinesSignal():
     # http://127.0.0.1:5000/api/fetchSignalChartJsonData
     tick = request.args["tick"]
+    tick = tick.upper()
 
     if tick == '':
         tick='AXR'
