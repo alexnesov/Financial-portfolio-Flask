@@ -30,9 +30,12 @@
 <div class="col-sm-9">
 
   <div class="card shadow">
-    <div class="card-header">
-      Evolution of number of signals per day
-    </div>
+
+    <button class = "collapsible" style="border-color: 0; background-image: linear-gradient(to bottom right,#80979b, #97c1fa48);">
+      <b>Evolution of number of signals per day</b></button>
+    <div class="content">
+
+      
     <div class="card-body">
       <div class="chart" id="line" style=max-width:100%;overflow:hidden;border:none;padding:0;margin:0 auto;display:block;" marginheight="0" marginwidth="0">
         <script>
@@ -44,6 +47,9 @@
     <div class="card-footer" style="background-color: white;">
       Last update: {{spEND}}
     </div><!--FOOTER-->
+
+  </div>  <!--CONTENT -->
+
   </div> <!--CARD 1-->
 
 </br>
@@ -53,22 +59,24 @@
 <div class="col-sm-3">
 
   <div class="card shadow">
-    <div class="card-header">
-      Number of signals
-    </div><!--HEADER-->
-
+    <button class = "collapsible" style="border-color: 0;  background-image: linear-gradient(to bottom right,#80979b, #97c1fa48);">
+      Number of signals</button>
+    <div class="content">
     <div class="card-body">
      <p style="text-align: center; font-size: 20px; color: rgba(0, 128, 0, 0.849);"> {{nSignals}} </p>
     </div> <!--BODY-->
+  </div>  <!--CONTENT -->
+
   </div><!--CARD-->
 
 </br>
 
   <div class="card shadow">
-    <div class="card-header">
-      <b>SP 500</b> evol. over the same period
-      (<strong>{{spSTART}}</strong> to <strong>{{spEND}}</strong>)
-    </div><!--HEADER-->
+      <button class = "collapsible" style="border-color: 0;  background-image: linear-gradient(to bottom right,#80979b, #97c1fa48);">
+        <b>SP 500</b> evol. over the same period
+        (<strong>{{spSTART}}</strong> to <strong>{{spEND}}</strong>)  
+      </button>
+      <div class="content">
     <div class="card-body">
       <p style="text-align: center; font-size: 20px; color: rgba(0, 128, 0, 0.849);">
         {%if SP500evolFLOAT>0%}
@@ -78,48 +86,42 @@
         <font color="red">{{SP500evolFLOAT}}</font> % 
         {% endif %}
       </p>
+
     </div> <!--BODY-->
+  </div>  <!--CONTENT -->
+
   </div><!--CARD-->
 
 </br>
 
 
-  <div class="card shadow">
-    <div class="card-header">
-      Number of signals after noise filter
-    </div><!--HEADER-->
-
-    <div class="card-body">
-     <p style="text-align: center; font-size: 20px; color: rgba(0, 128, 0, 0.849);"> {{nSignals}} </p>
-    </div> <!--BODY-->
-  </div><!--CARD-->
 
 </div><!--COL END-->
 </div>  <!--ROW-->
 
 <div class="card shadow">
-  <div class="card-header">
+  <button class = "collapsible" style="border-color: 0;  background-image: linear-gradient(to bottom right,#80979b, #97c1fa48);">
+    <b>List of signaled stocks</b></button>
+  <div class="content">
+      
+  <div class="card-body">
 
-    List of signaled stocks  
-</div>
+    <div class="row">
+        <div class="col-sm">
 
-<div class="card-body">
-
-  <div class="row">
-      <div class="col-sm">
-
-                  <code>
-                  # When 'Aroon Up' crosses 'Aroon Down' from below </br>
-                  df["signal"][short_window:] =np.where(df['short_mavg'][short_window:] > df['long_mavg'][short_window:], 1,0)</br>
-                  df['positions'] = df['signal'].diff()
-                  </code>
-                  </br>
-                  <code>
-                    df['doubleSignal'] = np.where(
-                      (df["Aroon Up"] > df["Aroon Down"]) & (df['positions']==1) & (df["Aroon Down"]<75) &(df["Aroon Up"]>55),
-                      1,0)
-                  </code>
-      </div>
+                    <code>
+                    # When 'Aroon Up' crosses 'Aroon Down' from below </br>
+                    df["signal"][short_window:] =np.where(df['short_mavg'][short_window:] > df['long_mavg'][short_window:], 1,0)</br>
+                    df['positions'] = df['signal'].diff()
+                    </code>
+                    </br>
+                    <code>
+                      df['doubleSignal'] = np.where(
+                        (df["Aroon Up"] > df["Aroon Down"]) & (df['positions']==1) & (df["Aroon Down"]<75) &(df["Aroon Up"]>55),
+                        1,0)
+                    </code>
+        </div>
+      </div>  <!--CONTENT -->
   
   </div>
 
@@ -194,6 +196,36 @@
     </div><!--CARD BODY-->
 
 </div> <!--CARD 3-->
+
+<script>
+  let coll = document.getElementsByClassName("collapsible");
+  let i = 0;
+
+  window.onload = ()=>{
+    let iniColl = document.querySelectorAll(".collapsible");
+    iniColl.forEach(function(c){
+      c.classList.add("active");
+      let iniCont = c.nextElementSibling;
+      if (iniCont.style.maxHeight){
+        iniCont.style.maxHeight = null;
+      } else {
+        iniCont.style.maxHeight = iniCont.scrollHeight + "px";
+      } 
+    });
+  };
+
+  for (i = 0; i < coll.length; i++) {
+    coll[i].addEventListener("click", function() {
+      this.classList.toggle("active");
+      var content = this.nextElementSibling;
+      if (content.style.maxHeight){
+        content.style.maxHeight = null;
+      } else {
+        content.style.maxHeight = content.scrollHeight + "px";
+      } 
+    });
+  }
+</script>
 
 </body>
 
