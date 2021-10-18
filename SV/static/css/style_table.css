@@ -18,9 +18,10 @@
   }
 }
 
-@font-face{
-  src: url(../fonts/Roboto-Light.ttf);
-  font-family: Roboto;
+
+@font-face {
+  font-family: 'Poppins'; /*a name to be used later*/
+  src: url('../fonts/Poppins-Thin.ttf' !important); /*URL to font*/
 }
 
 
@@ -73,6 +74,7 @@ td {
 tbody tr {
   transition: background 0.25s ease;
 }
+
 tbody tr:hover {
   background: #014055;
 }

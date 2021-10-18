@@ -52,8 +52,6 @@ body {
 }
 
 @font-face{
-  src: url(../fonts/Roboto-Light.ttf);
+  src: url(../fonts/Poppins-Light.ttf);
   font-family: Roboto;
-}
-
-
+  }

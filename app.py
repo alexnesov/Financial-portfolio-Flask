@@ -1,25 +1,23 @@
 from flask import render_template, Response, redirect, request, url_for, flash
-from flask.helpers import make_response
 from flask_login import login_user, login_required, logout_user
 from wtforms import TextField, Form
 import os, json, plotly
-from datetime import datetime 
+from datetime import datetime, timedelta
 
 from SV import app, db
 from SV.models import User
 from SV.forms import LoginForm, RegistrationForm
-from utils.db_manage import std_db_acc_obj
+from utils.db_manage import std_db_acc_obj, QuRetType
 from utils.fetchData import fetchSignals, fetchTechnicals, fetchOwnership, sp500evol
 from utils.graphs import makeOwnershipGraph, lineNBSignals
 from signals_lib.detailedGeneration import consolidateSignals
 
 from plotly.subplots import make_subplots
-from utils.db_manage import QuRetType, std_db_acc_obj
+from utils.db_manage import std_db_acc_obj
 import plotly.graph_objs as go
 
 strToday = str(datetime.today().strftime('%Y-%m-%d'))
 magickey = os.environ.get('magickey')
-
 
 
 class SearchForm(Form):
@@ -33,11 +31,9 @@ class SearchForm(Form):
 
 
 
-
 @app.route('/')
 def home():
     return render_template('home.html')
-
 
 
 
@@ -49,9 +45,9 @@ def register():
     
     if form.validate_on_submit():
         if magic==magickey:
-            user = User(email=form.email.data,
-                        username=form.username.data,
-                        password=form.password.data)
+            user = User(email       = form.email.data,
+                        username    = form.username.data,
+                        password    = form.password.data)
 
             db.session.add(user)
             db.session.commit()
@@ -79,6 +75,7 @@ def logout():
     logout_user()
     flash('You logged out!')
     return redirect(url_for('home'))
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -122,8 +119,8 @@ colNames = ['ValidTick',
             'Last closing price',
             'Price Evolution', 
             'Company',
-            'Sector','Industry']
-
+            'Sector',
+            'Industry']
 
 
 
@@ -157,10 +154,6 @@ def STD_FUNC_TABLE_PAGE():
 ####------Standard functions and arguments for the table page------#
 
 
-
-
-
-
 def tuplesToCSV(Tuples):
     """
     To be used by Flask's Reponse class, to return a csv type
@@ -187,7 +180,6 @@ def tuplesToCSV(Tuples):
 
 
 
-
 @app.route('/technicals')
 @login_required
 def technicals():
@@ -197,6 +189,7 @@ def technicals():
 
     return render_template('technicals.html',items=items, form=form)
     
+
 @app.route('/technicals', methods=['POST'])
 @login_required
 def submitTechnicals():
@@ -220,10 +213,10 @@ def ownership():
     plot    = makeOwnershipGraph(items, tick)
 
     return render_template('ownership.html',
-    items=items,
-    form=form,
-    plot=plot)
-    
+                    items   = items,
+                    form    = form,
+                    plot    = plot)
+                    
 
 @app.route('/ownership', methods=['POST'])
 @login_required
@@ -242,7 +235,6 @@ def submitOwnership():
 def macroView():
     return render_template('macroView.html')
     
-
 
 
 @app.route('/investInfra')
@@ -288,6 +280,23 @@ def getCSV():
         headers={"Content-disposition":
                  "attachment; filename=signals.csv"})
 
+
+
+
+@app.route('/api/fetchSectorEvol')
+@login_required
+def getSectorEvol():
+    today           = datetime.today()
+    delta1Months    = (today - timedelta(days = 50)).strftime('%Y-%m-%d')
+
+    qu              = (f"SELECT Symbol, Date, Close FROM marketdata.NASDAQ_20 \
+                        WHERE Date > {delta1Months}")
+
+    df              = db_acc_obj.exc_query(db_name  = 'marketdata', 
+                                           query    = qu,
+                                           retres   = QuRetType.ALLASPD)
+    ###### GRAPH PLOTTING ######
+    pass
 
 
 @app.route('/api/fetchSignalChartJsonData')

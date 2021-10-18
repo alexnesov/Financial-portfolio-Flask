@@ -19,10 +19,9 @@ padding-left: 11%;
 
 
 @font-face{
-src: url(../fonts/Roboto-Light.ttf);
-font-family: Roboto;
-}
-
+    src: url(../fonts/Roboto-Light.ttf);
+    font-family: Roboto;
+    }
 
 h3 {
 color:rgba(0, 132, 255, 0.952) !important;

@@ -12,8 +12,8 @@
 @media only screen and (max-width: 6000px) {
   #macroView_page{
     padding-top: 100px;
-    padding-right: 11%;
-    padding-left: 260px;
+    padding-right: 2%;
+    padding-left: 280px;
   }
 }
 
@@ -21,7 +21,7 @@
 @font-face{
   src: url(../fonts/Roboto-Light.ttf);
   font-family: Roboto;
-}
+  }
 
 
 h3 {
