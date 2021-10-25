@@ -27,6 +27,12 @@ To initiate db (cutover), run:
 	<li>Portfolio builder, also have evol for a set of tickers for a given holding period</li>
 	<li>Option chains integration</li>
 	<li>Put/call ratio integration</li>
+	<p>
+	https://stock-screener.org/options-profit-calculator.aspx
+	https://www.optionsprofitcalculator.com/calculator/long-call.html
+	https://optionstrat.com/
+	</p>
+	
 	<li>Peers Seekingalpha</li>
     	<li>RTVS detector + visualization of normality</lI>
     	<li>API connection w. EC2 to check infra. health</li>
@@ -94,3 +100,9 @@ https://stackoverflow.com/questions/15077489/static-assets-dont-show-up-for-flas
 
 Regarding big files upload towards S3:</br>
 https://aws.amazon.com/premiumsupport/knowledge-center/s3-large-file-uploads/
+
+
+
+</br>
+
+How to add table models
