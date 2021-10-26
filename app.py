@@ -289,13 +289,41 @@ def getSectorEvol():
     today           = datetime.today()
     delta1Months    = (today - timedelta(days = 50)).strftime('%Y-%m-%d')
 
-    qu              = (f"SELECT Symbol, Date, Close FROM marketdata.NASDAQ_20 \
-                        WHERE Date > {delta1Months}")
+    qu_NASDAQ       = (f"SELECT Symbol, Date, Close FROM marketdata.NASDAQ_20 \
+                        WHERE Date > '{delta1Months}'")
 
-    df              = db_acc_obj.exc_query(db_name  = 'marketdata', 
-                                           query    = qu,
+
+    qu_NYSE         =   (f"SELECT Symbol, Date, Close FROM marketdata.NYSE_20 \
+                        WHERE Date > '{delta1Months}'")
+
+    qu_sectors      = "SELECT * FROM sectors"
+
+    df_all_NASDAQ   = db_acc_obj.exc_query(db_name  = 'marketdata', 
+                                           query    = qu_NASDAQ,
                                            retres   = QuRetType.ALLASPD)
+    
+    df_all_NYSE     = db_acc_obj.exc_query(db_name  = 'marketdata', 
+                                           query    = qu_NYSE,
+                                           retres   = QuRetType.ALLASPD)
+
+    df_sectors      = db_acc_obj.exc_query(db_name  = 'marketdata', 
+                                           query    = qu_sectors,
+                                           retres   = QuRetType.ALLASPD)
+    df_sectors      = df_sectors[['Ticker', 'Company', 'Sector']]
+
+    df_sectors.rename(columns = {'Ticker':'Symbol'}, inplace = True)
+
+    test            = df_all_NASDAQ.merge(df_sectors, on='Symbol', how='left')
+
+    uniques_NASDAQ  = (df_all_NASDAQ.Symbol.unique()).tolist()    
+    uniques_NYSE    = (df_all_NYSE.Symbol.unique()).tolist()
+    
+    len(uniques_NASDAQ)
+    len(uniques_NYSE)                                     
+
     ###### GRAPH PLOTTING ######
+
+
     pass
 
 
