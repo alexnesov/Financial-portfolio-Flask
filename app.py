@@ -250,6 +250,12 @@ def portfolios():
     return render_template('portfolios.html')
 
 
+@app.route('/crypto')
+@login_required
+def crypto():
+    return render_template('crypto.html')
+
+
 
 @app.route('/ideas')
 @login_required
