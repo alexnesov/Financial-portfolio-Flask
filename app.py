@@ -190,6 +190,7 @@ def technicals():
     return render_template('technicals.html',items=items, form=form)
     
 
+
 @app.route('/technicals', methods=['POST'])
 @login_required
 def submitTechnicals():
@@ -203,6 +204,7 @@ def submitTechnicals():
     stock   = text)
 
 
+
 @app.route('/ownership')
 @login_required
 def ownership():
@@ -213,9 +215,9 @@ def ownership():
     plot    = makeOwnershipGraph(items, tick)
 
     return render_template('ownership.html',
-                    items   = items,
-                    form    = form,
-                    plot    = plot)
+                            items   = items,
+                            form    = form,
+                            plot    = plot)
                     
 
 @app.route('/ownership', methods=['POST'])
@@ -294,7 +296,6 @@ def getCSV():
 def getSectorEvol():
     today           = datetime.today()
     delta1Months    = (today - timedelta(days = 50)).strftime('%Y-%m-%d')
-
     qu_NASDAQ       = (f"SELECT Symbol, Date, Close FROM marketdata.NASDAQ_20 \
                         WHERE Date > '{delta1Months}'")
 
@@ -341,16 +342,17 @@ def makeLinesSignal():
     tick = tick.upper()
 
     if tick == '':
-        tick='AXR'
+        tick ='AXR'
 
     print(f"tick recieved: {tick}")
     # You can have tick validation before moving ahead, if it's invalid tick then return error on UI
 
     df = consolidateSignals(tick)
 
-    fig = make_subplots(rows=7, cols=1,
-                        shared_xaxes=True,
-                        vertical_spacing=0.03,
+    fig = make_subplots(rows                = 7, 
+                        cols                = 1,
+                        shared_xaxes        = True,
+                        vertical_spacing    = 0.03,
                         row_width=[0.15, 0.15, 0.15, 0.15, 0.15,0.15,0.30],
                         specs=[[{"rowspan":2}],
                         [None],
@@ -413,22 +415,21 @@ def makeLinesSignal():
 
     fig.update_traces(line_width=1.5)
     fig.update_layout(
-    title=f'Trend Reversal Detection for {tick}',
-    #width=1400,
-    height=1100,
+    title   =    f'Trend Reversal Detection for {tick}',
+    height  =   1100,
     plot_bgcolor='rgba(0,0,0,0)',
-    margin=dict(
-    autoexpand=False,
-    l=100,
-    r=20,
-    t=110,
-    ),
-    legend=dict(
-    orientation="h",
-    yanchor="bottom",
-    y=1.02,
-    xanchor="right",
-    x=1
+    margin  =   dict(
+        autoexpand = False,
+        l = 100,
+        r = 20,
+        t = 110,
+        ),
+    legend = dict(
+        orientation="h",
+        yanchor="bottom",
+        y=1.02,
+        xanchor="right",
+        x=1
         )
     )
     fig.update_yaxes(showline=False, linewidth=1,gridwidth=0.2, linecolor='grey', gridcolor='rgba(192,192,192,0.5)')
