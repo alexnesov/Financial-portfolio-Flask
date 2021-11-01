@@ -198,10 +198,22 @@ def makeLinesSignal(tick):
 
 def makeOwnershipGraph(items, tick):
 
-
-    names = ["No","Ticker","MarketCap","SharesOutstanding","SharesFloat","InsiderOwnership",\
-        "InsiderTransactions","InstitutionalOwnership","InstitutionalTransactions","FloatShort",\
-            "ShortRatio","AverageVolume","Price","Change","Volume","Date"]
+    names = ["No",
+             "Ticker",
+             "MarketCap",
+             "SharesOutstanding", 
+             "SharesFloat", 
+             "InsiderOwnership",
+             "InsiderTransactions",
+             "InstitutionalOwnership", 
+             "InstitutionalTransactions", 
+             "FloatShort", 
+             "ShortRatio", 
+             "AverageVolume", 
+             "Price", 
+             "Change", 
+             "Volume",
+             "Date"]
 
     df = TuplesToDF(items)
     df = renameCols(df,names)
