@@ -347,14 +347,14 @@ def makeLinesSignal():
     print(f"tick recieved: {tick}")
     # You can have tick validation before moving ahead, if it's invalid tick then return error on UI
 
-    df = consolidateSignals(tick)
+    df_signals = consolidateSignals(tick)
 
     fig = make_subplots(rows                = 7, 
                         cols                = 1,
                         shared_xaxes        = True,
                         vertical_spacing    = 0.03,
-                        row_width=[0.15, 0.15, 0.15, 0.15, 0.15,0.15,0.30],
-                        specs=[[{"rowspan":2}],
+                        row_width           = [0.15, 0.15, 0.15, 0.15, 0.15,0.15,0.30],
+                        specs               = [[{"rowspan":2}],
                         [None],
                         [{}],
                         [{}],
@@ -364,49 +364,49 @@ def makeLinesSignal():
                         ])
 
                         
-    fig.add_trace(go.Candlestick(x=df.Date,open=df.Open,close=df.Close,low=df.Low,high=df.High),
+    fig.add_trace(go.Candlestick(x=df_signals.Date,open=df_signals.Open,close=df_signals.Close,low=df_signals.Low,high=df_signals.High),
                 row=1, col=1)
 
     fig.update_layout(xaxis_rangeslider_visible=False)
     
-    fig.add_trace(go.Scatter(x=df.Date, y=df['long_mavg'], name='long_mvg 50',mode='lines',
+    fig.add_trace(go.Scatter(x=df_signals.Date, y=df_signals['long_mavg'], name='long_mvg 50',mode='lines',
         line=dict(color='orange',dash='dash')),
                 row=1, col=1)
 
-    fig.add_trace(go.Scatter(x=df.Date, y=df['short_mavg'], name='short_mvg 10',mode='lines',
+    fig.add_trace(go.Scatter(x=df_signals.Date, y=df_signals['short_mavg'], name='short_mvg 10',mode='lines',
         line=dict(color='royalblue')),
                 row=1, col=1)
 
-    fig.add_trace(go.Scatter(x=df.Date[df.positions==1], y=df.short_mavg[df.positions==1], 
+    fig.add_trace(go.Scatter(x=df_signals.Date[df_signals.positions==1], y=df_signals.short_mavg[df_signals.positions==1], 
     name='MA crossing',mode='markers', marker_symbol='triangle-up', marker_size=10, marker_color='blue'),
                 row=1, col=1)
     
-    fig.add_trace(go.Scatter(x=df.Date[df.doubleSignal==1], y=df.short_mavg[df.doubleSignal==1], 
+    fig.add_trace(go.Scatter(x=df_signals.Date[df_signals.doubleSignal==1], y=df_signals.short_mavg[df_signals.doubleSignal==1], 
     name='Double Signal',mode='markers', marker_symbol='triangle-up', marker_size=15, marker_color='green'),
                 row=1, col=1)
 
-    fig.add_trace(go.Scatter(x=df.Date, y=df['Aroon Up'], name='Aroon Up', mode='lines',
+    fig.add_trace(go.Scatter(x=df_signals.Date, y=df_signals['Aroon Up'], name='Aroon Up', mode='lines',
         line=dict(color='green')),
                 row=3, col=1)
 
-    fig.add_trace(go.Scatter(x=df.Date, y=df['Aroon Down'], name='Aroon Down', mode='lines',\
+    fig.add_trace(go.Scatter(x=df_signals.Date, y=df_signals['Aroon Down'], name='Aroon Down', mode='lines',\
         line=dict(color='red')),
                 row=3, col=1)
 
-    fig.add_trace(go.Scatter(x=df.Date, y=df['Volume'], name='Volume', mode='lines',\
+    fig.add_trace(go.Scatter(x=df_signals.Date, y=df_signals['Volume'], name='Volume', mode='lines',\
         line=dict(color='purple')),
                 row=4, col=1)
 
-    fig.add_trace(go.Scatter(x=df.Date, y=df['diff_stock_bench'], name='diff_stock_bench', mode='lines',\
+    fig.add_trace(go.Scatter(x=df_signals.Date, y=df_signals['diff_stock_bench'], name='diff_stock_bench', mode='lines',\
         line=dict(color='purple')),
                 row=5, col=1)
 
 
-    fig.add_trace(go.Scatter(x=df.Date, y=df['rolling_mean_35'], name='rolling_mean_35', mode='lines',\
+    fig.add_trace(go.Scatter(x=df_signals.Date, y=df_signals['rolling_mean_35'], name='rolling_mean_35', mode='lines',\
         line=dict(color='red')),
                 row=6, col=1)
     
-    fig.add_trace(go.Scatter(x=df.Date, y=df['RSI'], name='RSI', mode='lines',\
+    fig.add_trace(go.Scatter(x=df_signals.Date, y=df_signals['RSI'], name='RSI', mode='lines',\
         line=dict(color='Orange')),
                 row=7, col=1)
 

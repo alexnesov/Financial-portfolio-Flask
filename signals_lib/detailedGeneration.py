@@ -1,4 +1,5 @@
 
+from pandas.core.reshape.merge import merge
 from utils.db_manage import QuRetType, std_db_acc_obj
 from signals_lib.ta import aroon, rsi
 
@@ -54,7 +55,6 @@ def SignalDetection(df):
     
     # RSI
     ind_rsi             = rsi(df, timePeriodRSI)
-    print(ind_rsi)
 
     df['RSI']           = ind_rsi
     df['Aroon Down']    = aroonDOWN
@@ -98,7 +98,6 @@ def getData(tick):
 
 
     print(f'Getting tick data from RDS (stock exchange: {stockExchange}). . .')
-
     qu = f"SELECT * FROM {stockExchange}_20 WHERE Symbol = '{tick}'"
     df = db_acc_obj.exc_query(db_name='marketdata', query=qu,\
         retres=QuRetType.ALLASPD)
@@ -128,30 +127,34 @@ def consolidateSignals(tick):
 
     #### SP500 data fetch + % evol 1D calculation"
     print('Getting SP500 data from RDS to build the benchmark comparison. . .')
-    dfsp500                             = getsp500() # YYYY-MM-DD
-    dfsp500['returnSP500_1D']           = dfsp500.Close_sp.pct_change()[1:]
+    dfsp500                                = getsp500() # YYYY-MM-DD
+    dfsp500['returnSP500_1D']              = dfsp500.Close_sp.pct_change()[1:]
     #### SP500 data fetch + % evol 1D calculation"
 
-    initialDF                           = getData(tick)
-
-    dfStock                             = SignalDetection(initialDF)
-    dfStock[f'return_1D']               = dfStock.Close.pct_change()[1:] # YYYY-MM-DD
-    dfStock.Date                        = pd.to_datetime(dfStock.Date)
-    dfStock                             = pd.merge(dfStock, dfsp500, on='Date',how='inner')
-    dfStock['diff_stock_bench']         = dfStock['return_1D'] - dfStock['returnSP500_1D']
-    dfStock[f'rolling_mean_{35}']       = dfStock['diff_stock_bench'].rolling(35).mean()
-    dfStock[f'rolling_mean_{10}']       = dfStock['diff_stock_bench'].rolling(10).mean()
-    dfStock[f'rolling_mean_{5}']        = dfStock['diff_stock_bench'].rolling(5).mean()
+    initialDF                              = getData(tick)
+    df_signals                             = SignalDetection(initialDF)
+    df_signals[f'return_1D']               = df_signals.Close.pct_change()[1:] # YYYY-MM-DD
+    df_signals.Date                        = pd.to_datetime(df_signals.Date)
+    df_signals                             = pd.merge(df_signals, dfsp500, on='Date',how='inner')
+    df_signals['diff_stock_bench']         = df_signals['return_1D'] - df_signals['returnSP500_1D']
+    df_signals[f'rolling_mean_{35}']       = df_signals['diff_stock_bench'].rolling(35).mean()
+    df_signals[f'rolling_mean_{10}']       = df_signals['diff_stock_bench'].rolling(10).mean()
+    df_signals[f'rolling_mean_{5}']        = df_signals['diff_stock_bench'].rolling(5).mean()
 
     qu_gap = f"SELECT * FROM marketdata.Technicals WHERE Ticker='{tick}'"
 
+    # print('Getting the technicals')
+
+    """
     df_gap                              = db_acc_obj.exc_query(db_name  = 'marketdata', 
                                                                query    = qu_gap, 
                                                                retres   = QuRetType.ALLASPD)
 
     df_gap['Date']                      = df_gap['Date'].astype('datetime64[ns]')
-    merged                              = dfStock.merge(df_gap[['Date','Gap']], on='Date', how='left')
-    
-    return merged
+    merged                              = df_signals.merge(df_gap[['Date','Gap']], on='Date', how='left')
+
+    print(merged)
+    """
+    return df_signals
 
 
