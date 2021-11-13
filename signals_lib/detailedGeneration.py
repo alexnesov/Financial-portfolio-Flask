@@ -119,8 +119,6 @@ def getsp500(DateSP='2020-01-01'):
     
 
 
-
-
 def consolidateSignals(tick):
     """
     """
