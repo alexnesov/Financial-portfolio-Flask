@@ -42,16 +42,21 @@
                           <a href="{{ url_for('table') }}"></i>Short</a>
                       </div>
               </div>
-                <div class="item"><a href="{{ url_for('portfolios') }}"><i class="fas fa-wallet"></i>Portfolios <font color="#32CD32">(to come)</font></a></div>
+              <div class="item"><a href="{{ url_for('portfolios') }}"><i class="fas fa-wallet"></i>Portfolios <font color="#32CD32">(to come)</font></a></div>
               <div class="item"><a href="{{ url_for('ideas') }}"><i class="fas fa-lightbulb"></i>Trading Ideas</font></a></div>
               <div class="item"><a href="#"><i class="fas fa-book"></i>Buffet <font color="#32CD32">(to come)</font></a></div>
               <div class="item"><a href="#"><i class="fas fa-chart-line"></i>Options Monitoring</a></div>
               <div class="item"><a href="/crypto"><i class="fab fa-bitcoin"></i>Crypto</a></div>
+              <div class="item">
+                <a class="sub-btn"><i class="fas fa-square-root-alt"></i>Quantitative finance<i class="fas fa-arrow-down dropdown"></i></a>
+                      <div class="sub-menu">
+                          <a href="{{ url_for('brownian') }}"></i>Brownian Motion</a>
+                      </div>
+              </div>
 
             </div> <!-- MENU -->
           </div>
         
-
           <script type="text/javascript" src="../static/JS/dashboard.js"></script>
 
 {% block content %}

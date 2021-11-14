@@ -265,6 +265,13 @@ def ideas():
     return render_template('ideas.html')
 
 
+@app.route('/brownian')
+@login_required
+def brownian():
+    return render_template('brownian.html')
+
+
+
 @app.route('/table')
 @login_required
 def table():
