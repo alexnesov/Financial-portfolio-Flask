@@ -80,7 +80,9 @@ def logout():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
 
+    print('Logging in. . .')
     form = LoginForm()
+
     if form.validate_on_submit():
         # Grab the user from our User Models table
         user = User.query.filter_by(email=form.email.data).first()
@@ -89,12 +91,13 @@ def login():
         # The verify_password method comes from the User object
         # https://stackoverflow.com/questions/2209755/python-operation-vs-is-not
 
-        if user.check_password(form.password.data) and user is not None:
+        if user is None:
+            print('User is None')
+            return render_template('login.html', form = form, log_error = True)
+        elif user.check_password(form.password.data) and user is not None:
             # Log in the user
 
             login_user(user)
-            flash('Logged in successfully.')
-
             # If a user was trying to visit a page that requires a login
             # flask saves that URL as 'next'.
             next = request.args.get('next')
@@ -105,7 +108,7 @@ def login():
                 next = url_for('welcome_user')
 
             return redirect(next)
-    return render_template('login.html', form=form)
+    return render_template('login.html', form=form, log_error = False)
 
 
 ####------Standard functions and arguments for the table page------#
