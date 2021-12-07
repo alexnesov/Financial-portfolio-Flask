@@ -2,12 +2,13 @@ from flask import render_template, Response, redirect, request, url_for, flash
 from flask_login import login_user, login_required, logout_user
 from wtforms import TextField, Form
 import os, json, plotly
-from datetime import datetime, timedelta
+from datetime import datetime
+import numpy as np
 
 from SV import app, db
 from SV.models import User
 from SV.forms import LoginForm, RegistrationForm
-from utils.db_manage import std_db_acc_obj, QuRetType
+from utils.db_manage import std_db_acc_obj
 from utils.fetchData import fetchSignals, fetchTechnicals, fetchOwnership, sp500evol
 from utils.graphs import makeOwnershipGraph, lineNBSignals
 from signals_lib.detailedGeneration import consolidateSignals
@@ -15,6 +16,7 @@ from signals_lib.detailedGeneration import consolidateSignals
 from plotly.subplots import make_subplots
 from utils.db_manage import std_db_acc_obj
 import plotly.graph_objs as go
+import plotly.express as px
 
 strToday = str(datetime.today().strftime('%Y-%m-%d'))
 magickey = os.environ.get('magickey')
@@ -307,48 +309,20 @@ def getCSV():
 
 
 
-@app.route('/api/fetchSectorEvol')
+@app.route('/api/fetchTreeMapJsonData')
 @login_required
-def getSectorEvol():
-    today           = datetime.today()
-    delta1Months    = (today - timedelta(days = 50)).strftime('%Y-%m-%d')
-    qu_NASDAQ       = (f"SELECT Symbol, Date, Close FROM marketdata.NASDAQ_20 \
-                        WHERE Date > '{delta1Months}'")
+def makeTreeMap():
 
+    df = px.data.gapminder().query("year == 2007")
+    fig = px.treemap(df, path=[px.Constant("world"), 'continent', 'country'], values='pop',
+                    color='lifeExp', hover_data = ['iso_alpha'],
+                    color_continuous_scale      = 'RdBu',
+                    color_continuous_midpoint   = np.average(df['lifeExp'], weights=df['pop']))
+    fig.update_layout(margin = dict(t=0, l=0, r=0, b=0))
 
-    qu_NYSE         =   (f"SELECT Symbol, Date, Close FROM marketdata.NYSE_20 \
-                        WHERE Date > '{delta1Months}'")
+    graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
 
-    qu_sectors      = "SELECT * FROM sectors"
-
-    df_all_NASDAQ   = db_acc_obj.exc_query(db_name  = 'marketdata', 
-                                           query    = qu_NASDAQ,
-                                           retres   = QuRetType.ALLASPD)
-    
-    df_all_NYSE     = db_acc_obj.exc_query(db_name  = 'marketdata', 
-                                           query    = qu_NYSE,
-                                           retres   = QuRetType.ALLASPD)
-
-    df_sectors      = db_acc_obj.exc_query(db_name  = 'marketdata', 
-                                           query    = qu_sectors,
-                                           retres   = QuRetType.ALLASPD)
-    df_sectors      = df_sectors[['Ticker', 'Company', 'Sector']]
-
-    df_sectors.rename(columns = {'Ticker':'Symbol'}, inplace = True)
-
-    test            = df_all_NASDAQ.merge(df_sectors, on='Symbol', how='left')
-
-    uniques_NASDAQ  = (df_all_NASDAQ.Symbol.unique()).tolist()    
-    uniques_NYSE    = (df_all_NYSE.Symbol.unique()).tolist()
-    
-    len(uniques_NASDAQ)
-    len(uniques_NYSE)                                     
-
-    ###### GRAPH PLOTTING ######
-
-
-    pass
-
+    return graphJSON
 
 @app.route('/api/fetchSignalChartJsonData')
 @login_required

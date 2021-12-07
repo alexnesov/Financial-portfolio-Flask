@@ -104,7 +104,7 @@ function fetchGraphData(apiURL, graphID, spinnerID, refreshBtnID, tsID) {
             console.log("ploting graph");
             $("#"+tsID).text(getTS());
         },
-        error: function (jqXHR, textStatus, errorThrown) {
+        error: function (textStatus, errorThrown) {
             createToast(graphID, textStatus, errorThrown);
             console.log("Error:", graphID, textStatus, errorThrown);
         },
@@ -121,7 +121,8 @@ function fetchGraphData(apiURL, graphID, spinnerID, refreshBtnID, tsID) {
 function fetchSignalChartJsonData() {
     // Graph_2
     console.log("sending request for > signalChart < to server");
-    fetchGraphData(`/api/fetchSignalChartJsonData?tick=${jQuery('#inputTick').val().trim()}`, "signalChart", "loader_graph2", "refreshBtn_2", "graph_2_TS");
+    fetchGraphData(`/api/fetchSignalChartJsonData?tick=${jQuery('#inputTick').val().trim()}`, 
+    "signalChart", "loader_graph2", "refreshBtn_2", "graph_2_TS");
 }
 
 
