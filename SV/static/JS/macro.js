@@ -39,7 +39,7 @@ function fetchTreeMapData(apiURL, graphID) {
 
 
 function fetchSectorEvolsJsonData() {
-    console.log("sending request for > sectorEvols < to server");
+    console.log("sending request for > treeMap < to server");
     fetchTreeMapData(`/api/fetchTreeMapJsonData`, "sectorEvolsTreeMap")
 }
 
