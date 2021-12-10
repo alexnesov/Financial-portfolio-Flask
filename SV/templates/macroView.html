@@ -32,9 +32,31 @@
       </ul>
     </div>
   </div>
+</br>
+</br>
 
-  <div id="sectorEvolsTreeMap"></div>
+<div class="card shadow">
 
+  <button class = "collapsible" style="border-color: 0; background-image: linear-gradient(to bottom right,#80979b, #97c1fa48);">
+    <b>American Stock Market (average made out of 5560 stocks)</b></button>
+  <div class="content">
+
+    
+  <div class="card-body">
+    <div class="chart" id="line" style=max-width:100%;overflow:hidden;border:none;padding:0;margin:0 auto;display:block;" marginheight="0" marginwidth="0">
+      <div id="sectorEvolsTreeMap""></div>
+
+    </div>
+  </div>  <!--BODY-->
+  <div class="card-footer" style="background-color: white;">
+    Last update: {{spEND}}
+  </div><!--FOOTER-->
+
+</div>  <!--CONTENT -->
+
+</div> <!--CARD 1-->
+
+</br>
   <h3>Macro economic drivers</h3>
 
 
@@ -190,6 +212,37 @@
 
   </div>
     </div><!--CARD BODY-->
+
+    <script>
+      let coll = document.getElementsByClassName("collapsible");
+      let i = 0;
+    
+      window.onload = ()=>{
+        let iniColl = document.querySelectorAll(".collapsible");
+        iniColl.forEach(function(c){
+          c.classList.add("active");
+          let iniCont = c.nextElementSibling;
+          if (iniCont.style.maxHeight){
+            iniCont.style.maxHeight = null;
+          } else {
+            iniCont.style.maxHeight = iniCont.scrollHeight + "px";
+          } 
+        });
+      };
+    
+      for (i = 0; i < coll.length; i++) {
+        coll[i].addEventListener("click", function() {
+          this.classList.toggle("active");
+          var content = this.nextElementSibling;
+          if (content.style.maxHeight){
+            content.style.maxHeight = null;
+          } else {
+            content.style.maxHeight = content.scrollHeight + "px";
+          } 
+        });
+        }
+    </script>
+
 </body>
 {% include "base_dashboard.html" %}
 

@@ -8,7 +8,7 @@ import numpy as np
 from SV import app, db
 from SV.models import User
 from SV.forms import LoginForm, RegistrationForm
-from utils.db_manage import std_db_acc_obj
+from utils.db_manage import std_db_acc_obj, QuRetType
 from utils.fetchData import fetchSignals, fetchTechnicals, fetchOwnership, sp500evol
 from utils.graphs import makeOwnershipGraph, lineNBSignals
 from signals_lib.detailedGeneration import consolidateSignals
@@ -313,16 +313,60 @@ def getCSV():
 @login_required
 def makeTreeMap():
 
-    df = px.data.gapminder().query("year == 2007")
-    fig = px.treemap(df, path=[px.Constant("world"), 'continent', 'country'], values='pop',
-                    color='lifeExp', hover_data = ['iso_alpha'],
-                    color_continuous_scale      = 'RdBu',
-                    color_continuous_midpoint   = np.average(df['lifeExp'], weights=df['pop']))
+    qu = "SELECT * FROM marketdata.sectorEvols"
+    df_sector_evols = db_acc_obj.exc_query(db_name='marketdata', query=qu,\
+                        retres = QuRetType.ALLASPD)
+
+    df_sector_evols_grped_sec = ((df_sector_evols.groupby(['Sector']).mean())
+                                                                    .reset_index()
+                                                                    .sort_values(by=['Perf_360'],
+                                                                    ascending=False)
+                                                                    )
+
+
+    print(df_sector_evols_grped_sec)
+
+    """
+    fig     = px.treemap(df_sector_evols, 
+                        path=[px.Constant("American Stock Market (average made out of 5560 stocks)"), 
+                        'Sector', 'Industry'], 
+                        values                      ='Perf_360',
+                        color                       ='Perf_360', 
+                        hover_data                  = ['Industry'],
+                        color_continuous_scale      = 'YlGn')
+    """
+
+    animals=['giraffes', 'orangutans', 'monkeys']
+
+    fig = go.Figure([go.Bar(x=df_sector_evols_grped_sec.Sector, 
+                            y=df_sector_evols_grped_sec.Perf_360)])
+
+    fig.update_yaxes(showline       = False, 
+                    linewidth       = 1,
+                    gridwidth       = 0.2, 
+                    linecolor       = 'grey', 
+                    gridcolor       = 'rgba(192,192,192,0.5)',
+                    zeroline        = True,
+                    zerolinewidth   = 1,
+                    zerolinecolor   = 'black')
+
+    fig.update_layout(
+    plot_bgcolor    = 'rgba(0,0,0,0)',
+    legend          = dict(
+                    orientation = "h",
+                    yanchor     = "bottom",
+                    y           = 1.02,
+                    xanchor     = "right",
+                    x           = 1
+                    )
+    )
     fig.update_layout(margin = dict(t=0, l=0, r=0, b=0))
 
-    graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
+    graphJSON = json.dumps(fig, cls = plotly.utils.PlotlyJSONEncoder)
 
     return graphJSON
+
+
 
 @app.route('/api/fetchSignalChartJsonData')
 @login_required
