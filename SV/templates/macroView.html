@@ -7,6 +7,7 @@
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
   <script src="../static/JS/macro.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
 </head>
 <body id="macroView_page" style="background-color: #F9FAFE;">
@@ -15,6 +16,22 @@
 
   <h3>Stock market overview</h3>
 
+  <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+    <button type="button" class="btn  btn-outline-primary">1 Day Performance</button>
+    <button type="button" class="btn  btn-outline-primary">1 Week Performance</button>
+  
+    <div class="btn-group" role="group">
+      <button id="btnGroupDrop1" type="button" class="btn  btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+        Other Intervals
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+        <li><a class="dropdown-item" href="#">1 Month Performance</a></li>
+        <li><a class="dropdown-item" href="#">3 Months Performance</a></li>
+        <li><a class="dropdown-item" href="#">6 Months Performance</a></li>
+        <li><a class="dropdown-item" href="#">1 Year Performance</a></li>
+      </ul>
+    </div>
+  </div>
 
   <div id="sectorEvolsTreeMap"></div>
 
