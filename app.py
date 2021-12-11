@@ -309,9 +309,14 @@ def getCSV():
 
 
 
-@app.route('/api/fetchTreeMapJsonData')
+@app.route('/api/fetchSectorEvols')
 @login_required
-def makeTreeMap():
+def get_sectors_evols():
+
+    interval = request.args["interval"]
+
+    print('interval: ', interval)
+
 
     qu = "SELECT * FROM marketdata.sectorEvols"
     df_sector_evols = db_acc_obj.exc_query(db_name='marketdata', query=qu,\
@@ -319,10 +324,9 @@ def makeTreeMap():
 
     df_sector_evols_grped_sec = ((df_sector_evols.groupby(['Sector']).mean())
                                                                     .reset_index()
-                                                                    .sort_values(by=['Perf_360'],
+                                                                    .sort_values(by=[f'{interval}'],
                                                                     ascending=False)
                                                                     )
-
 
     print(df_sector_evols_grped_sec)
 
@@ -339,7 +343,7 @@ def makeTreeMap():
     animals=['giraffes', 'orangutans', 'monkeys']
 
     fig = go.Figure([go.Bar(x=df_sector_evols_grped_sec.Sector, 
-                            y=df_sector_evols_grped_sec.Perf_360)])
+                            y=df_sector_evols_grped_sec[f'{interval}'])])
 
     fig.update_yaxes(showline       = False, 
                     linewidth       = 1,

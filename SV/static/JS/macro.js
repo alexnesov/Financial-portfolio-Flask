@@ -6,19 +6,15 @@ function plotGraph(graphID, jsonData) {
 
 
 
-function fetchTreeMapData(apiURL, graphID) {
-
-
+function fetchTreeMapData(apiURL, graphID, spinnerID) {
     $.ajax({
         type: 'GET',
         url: apiURL,
         data: null,
-        /*
         beforeSend: function () {
             console.log("starting spinner")
-            $("#" + spinnerID).addClass("spinner-border");
-            $("#" + refreshBtnID).hide();
-        },*/
+            $("#" + spinnerID).show();
+        },
         success: function (response) {
             console.log("response received from server");
             plotGraph(graphID, JSON.parse(response));
@@ -28,21 +24,22 @@ function fetchTreeMapData(apiURL, graphID) {
         error: function (textStatus, errorThrown) {
             // createToast(graphID, textStatus, errorThrown);
             console.log("Error:", graphID, textStatus, errorThrown);
-        }/*,
+        },
         complete: function () {
-            $("#" + spinnerID).removeClass("spinner-border");
-            $("#" + refreshBtnID).show();
-        }*/
+            $("#" + spinnerID).hide();
+        }
     }); //close ajax
 }
 
 
 
-function fetchSectorEvolsJsonData() {
-    console.log("sending request for > treeMap < to server");
-    fetchTreeMapData(`/api/fetchTreeMapJsonData`, "sectorEvolsTreeMap")
+function fetchSectorEvolsJsonData(interval) {
+    /**/
+    console.log("sending request for > sectorEvols < to server");
+    fetchTreeMapData(`/api/fetchSectorEvols?interval=${interval}`, "sectorEvolsTreeMap", "spinner")
+    console.log(`/api/fetchSectorEvols?interval=${interval}`)
 }
 
 
 Plotly.newPlot("sectorEvolsTreeMap", null, { autosize: true }, { responsive: true }); // Graph 2
-fetchSectorEvolsJsonData()
+fetchSectorEvolsJsonData("1day")

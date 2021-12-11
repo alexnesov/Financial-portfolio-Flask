@@ -8,53 +8,65 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
   <script src="../static/JS/macro.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/spin.js/2.3.2/spin.min.js" crossorigin="anonymous"></script>
 </head>
 <body id="macroView_page" style="background-color: #F9FAFE;">
-
 
 
   <h3>Stock market overview</h3>
 
   <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-    <button type="button" class="btn  btn-outline-primary">1 Day Performance</button>
-    <button type="button" class="btn  btn-outline-primary">1 Week Performance</button>
-  
-    <div class="btn-group" role="group">
+    <button type="button" class="btn  btn-outline-primary" onclick="fetchSectorEvolsJsonData('Perf_1')">1 Day Performance</button>
+    <button type="button" class="btn  btn-outline-primary" onclick="fetchSectorEvolsJsonData('Perf_5')">1 Week Performance</button>
+  <div class="btn-group" role="group">
       <button id="btnGroupDrop1" type="button" class="btn  btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
         Other Intervals
       </button>
       <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-        <li><a class="dropdown-item" href="#">1 Month Performance</a></li>
-        <li><a class="dropdown-item" href="#">3 Months Performance</a></li>
-        <li><a class="dropdown-item" href="#">6 Months Performance</a></li>
-        <li><a class="dropdown-item" href="#">1 Year Performance</a></li>
+        <li><a class="dropdown-item" onclick="fetchSectorEvolsJsonData('Perf_30')">1 Month Performance</a></li>
+        <li><a class="dropdown-item" onclick="fetchSectorEvolsJsonData('Perf_90')">3 Months Performance</a></li>
+        <li><a class="dropdown-item" onclick="fetchSectorEvolsJsonData('Perf_180')">6 Months Performance</a></li>
+        <li><a class="dropdown-item" onclick="fetchSectorEvolsJsonData('Perf_360')">1 Year Performance</a></li>
       </ul>
     </div>
   </div>
 </br>
 </br>
 
-<div class="card shadow">
 
-  <button class = "collapsible" style="border-color: 0; background-image: linear-gradient(to bottom right,#80979b, #97c1fa48);">
-    <b>American Stock Market (average made out of 5560 stocks)</b></button>
-  <div class="content">
+<div class="row">
+  <div class="col">
 
-    
-  <div class="card-body">
-    <div class="chart" id="line" style=max-width:100%;overflow:hidden;border:none;padding:0;margin:0 auto;display:block;" marginheight="0" marginwidth="0">
-      <div id="sectorEvolsTreeMap""></div>
+    <div class="card shadow">
+      <button class = "collapsible" style="border-color: 0; background-image: linear-gradient(to bottom right,#80979b, #97c1fa48);">
+        <b>American Stock Market (average made out of 5560 stocks)</b></button>
+      <div class="content">
+        <div class="card-body">
+            <div id="spinner"></div>
+            <div id="sectorEvolsTreeMap""></div>
+        </div>  <!--BODY-->
+        <div class="card-footer" style="background-color: white;">
+          Last update: 
+        </div><!--FOOTER-->
+      </div>  <!--CONTENT -->
+    </div> <!--CARD 1-->
+  </div> <!-- COL -->
 
-    </div>
-  </div>  <!--BODY-->
-  <div class="card-footer" style="background-color: white;">
-    Last update: {{spEND}}
-  </div><!--FOOTER-->
+    <div class="card shadow">
+      <button class = "collapsible" style="border-color: 0; background-image: linear-gradient(to bottom right,#80979b, #97c1fa48);">
+        <b>American Stock Market (average made out of 5560 stocks)</b></button>
+      <div class="content">
+        <div class="card-body">
+        </div>  <!--BODY-->
+        <div class="card-footer" style="background-color: white;">
+          Last update: 
+        </div><!--FOOTER-->
+      </div>  <!--CONTENT -->
+    </div> <!--CARD -->
+  </div> <!-- COL -->
 
-</div>  <!--CONTENT -->
+</div> <!--ROW-->
 
-</div> <!--CARD 1-->
 
 </br>
   <h3>Macro economic drivers</h3>
@@ -241,6 +253,31 @@
           } 
         });
         }
+
+        let opts = {
+                  lines: 8,
+                  length: 13,
+                  width: 3,
+                  radius: 13,
+                  scale: 0.8,
+                  corners: 1,
+                  opacity: 0.25,
+                  rotate: 0,
+                  direction: 1,
+                  color: '#000000', // CSS color or array of colors
+                  speed: 1,
+                  trail: 60,
+                  fps: 25,
+                  zIndex: 2e9,
+                  className: 'spinner',
+                  top: '50%',
+                  left: '50%',
+                  shadow: false,
+                  hwaccel: false,
+                  position: 'absolute',
+                  },
+          target = document.getElementById('spinner'),
+          spinner = new Spinner(opts).spin(target);
     </script>
 
 </body>
