@@ -6,7 +6,7 @@ function plotGraph(graphID, jsonData) {
 
 
 
-function fetchTreeMapData(apiURL, graphID, spinnerID) {
+function fetchTreeMapData(apiURL, graphID, spinnerID, interval) {
     $.ajax({
         type: 'GET',
         url: apiURL,
@@ -36,10 +36,10 @@ function fetchTreeMapData(apiURL, graphID, spinnerID) {
 function fetchSectorEvolsJsonData(interval) {
     /**/
     console.log("sending request for > sectorEvols < to server");
-    fetchTreeMapData(`/api/fetchSectorEvols?interval=${interval}`, "sectorEvolsTreeMap", "spinner")
-    console.log(`/api/fetchSectorEvols?interval=${interval}`)
+    console.log(`Interval: `, interval)
+    fetchTreeMapData(`/api/fetchSectorEvols?interval=${interval}`, "sectorEvolsTreeMap", "spinner", interval)
 }
 
 
 Plotly.newPlot("sectorEvolsTreeMap", null, { autosize: true }, { responsive: true }); // Graph 2
-fetchSectorEvolsJsonData("1day")
+fetchSectorEvolsJsonData("Perf_1")

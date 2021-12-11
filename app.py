@@ -473,13 +473,13 @@ def makeLinesSignal():
     fig.update_yaxes(showline=False, linewidth=1,gridwidth=0.2, linecolor='grey', gridcolor='rgba(192,192,192,0.5)')
 
 
-    fig['layout']['xaxis6']['title']='Date'
-    fig['layout']['yaxis']['title']='Price'
-    fig['layout']['yaxis2']['title']='Aroon'
-    fig['layout']['yaxis3']['title']='Volume'
-    fig['layout']['yaxis4']['title']='diff_stock_bench'
-    fig['layout']['yaxis5']['title']='rolling_mean_35'
-    fig['layout']['yaxis6']['title']='RSI'
+    fig['layout']['xaxis6']['title']    = 'Date'
+    fig['layout']['yaxis']['title']     = 'Price'
+    fig['layout']['yaxis2']['title']    = 'Aroon'
+    fig['layout']['yaxis3']['title']    = 'Volume'
+    fig['layout']['yaxis4']['title']    = 'diff_stock_bench'
+    fig['layout']['yaxis5']['title']    = 'rolling_mean_35'
+    fig['layout']['yaxis6']['title']    = 'RSI'
 
 
     annotations = []
