@@ -1,4 +1,8 @@
 
+$(document).ready(function() {
+    $('#example').DataTable();
+} );
+
 function plotGraph(graphID, jsonData) {
     // update the plot, .react is recommended for updating existing plot as it's more efficient than .newPlot
     Plotly.react(graphID, jsonData, { autosize: true });
