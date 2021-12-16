@@ -18,6 +18,11 @@
 }
 
 
+table.dataTable td {
+  font-size: 13px;
+}
+
+
 @font-face{
   src: url(../fonts/Roboto-Light.ttf);
   font-family: Roboto;

@@ -1,6 +1,17 @@
 
 $(document).ready(function() {
     $('#example').DataTable();
+
+    const selectElement = document.querySelector('#example_length');
+    console.log("selectElement: ", selectElement);
+
+    selectElement.addEventListener('change', (event) => {
+
+        var sector_perf_content = document.getElementById("sector_perf");
+        sector_perf_content.style.maxHeight = sector_perf_content.scrollHeight + "px";
+
+      });
+
 } );
 
 function plotGraph(graphID, jsonData) {
@@ -8,6 +19,38 @@ function plotGraph(graphID, jsonData) {
     Plotly.react(graphID, jsonData, { autosize: true });
 }
 
+
+// Gets all the collapsibles --> HTML collection
+let coll = document.getElementsByClassName("collapsible");
+
+let i = 0;
+
+window.onload = ()=>{
+let iniColl = document.querySelectorAll(".collapsible");
+iniColl.forEach(function(c){
+        c.classList.add("active");
+        let iniCont = c.nextElementSibling;
+        if (iniCont.style.maxHeight){
+            iniCont.style.maxHeight = null;
+        } else {
+            iniCont.style.maxHeight = iniCont.scrollHeight + "px";
+        } 
+    });
+};
+
+for (i = 0; i < coll.length; i++) {
+    coll[i].addEventListener("click", function() {
+
+        this.classList.toggle("active");
+        var content = this.nextElementSibling;
+
+        if (content.style.maxHeight){
+            content.style.maxHeight = null;
+        } else {
+            content.style.maxHeight = content.scrollHeight + "px";
+        } 
+    });
+}
 
 
 function fetchTreeMapData(apiURL, graphID, spinnerID, interval) {

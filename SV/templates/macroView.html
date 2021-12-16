@@ -63,12 +63,16 @@
   <div class="col">
 
     <div class="card shadow">
-      <button class = "collapsible" style="border-color: 0; background-image: linear-gradient(to bottom right,#80979b, #97c1fa48);">
+      <button class = "collapsible" 
+              style = "border-color: 0; 
+                        background-image: linear-gradient(to bottom right,#80979b, #97c1fa48);"
+              id = "collapsible_sector_perf">
+
         <b>Performance by sector</b></button>
-      <div class="content">
+      <div class="content" id="sector_perf">
         <div class="card-body">
 
-          <table id="example" class="table table-striped" style="width:100%">
+        <table id="example" class="table table-striped" style="width:100%">
             <thead>
                 <tr>
                     <th>Name</th>
@@ -295,7 +299,6 @@
 
 </div> <!--ROW-->
 
-
 </br>
   <h3>Macro economic drivers</h3>
 
@@ -309,16 +312,6 @@
         <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
         </div> <!--BODY-->
       </div><!--CARD-->
-      </div>
-
-    <div class="col-sm-3">
-      <div class="card">
-        <div class="card-body">
-
-        <h5 class="card-title">Special title treatment</h5>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        </div>
-      </div>
     </div>
 
     <div class="col-sm-3">
@@ -331,6 +324,15 @@
       </div>
     </div>
 
+    <div class="col-sm-3">
+      <div class="card">
+        <div class="card-body">
+
+        <h5 class="card-title">Special title treatment</h5>
+        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        </div>
+      </div>
+    </div>
 
     <div class="col-sm-3">
       <div class="card">
@@ -343,7 +345,6 @@
     </div>
 
   </div> <!--ROW-->
-
 
 </br>
 
@@ -454,34 +455,7 @@
     </div><!--CARD BODY-->
 
     <script>
-      let coll = document.getElementsByClassName("collapsible");
-      let i = 0;
-    
-      window.onload = ()=>{
-        let iniColl = document.querySelectorAll(".collapsible");
-        iniColl.forEach(function(c){
-          c.classList.add("active");
-          let iniCont = c.nextElementSibling;
-          if (iniCont.style.maxHeight){
-            iniCont.style.maxHeight = null;
-          } else {
-            iniCont.style.maxHeight = iniCont.scrollHeight + "px";
-          } 
-        });
-      };
-    
-      for (i = 0; i < coll.length; i++) {
-        coll[i].addEventListener("click", function() {
-          this.classList.toggle("active");
-          var content = this.nextElementSibling;
-          if (content.style.maxHeight){
-            content.style.maxHeight = null;
-          } else {
-            content.style.maxHeight = content.scrollHeight + "px";
-          } 
-        });
-        }
-
+        /*SPINNER*/
         let opts = {
                   lines: 8,
                   length: 13,
@@ -506,7 +480,6 @@
                   },
           target = document.getElementById('spinner'),
           spinner = new Spinner(opts).spin(target);
-
     </script>
 
 </body>
