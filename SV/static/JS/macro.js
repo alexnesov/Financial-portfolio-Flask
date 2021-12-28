@@ -3,7 +3,6 @@ $(document).ready(function() {
     $('#example').DataTable();
 
     const selectElement = document.querySelector('#example_length');
-    console.log("selectElement: ", selectElement);
 
     selectElement.addEventListener('change', (event) => {
 
