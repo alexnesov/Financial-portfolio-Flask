@@ -49,9 +49,9 @@ class TradingIdea(db.Model):
     text        = db.Column(db.Text(140), nullable=False)
 
     def __init__(self, title, text, user_id):
-        self.title = title
-        self.text = text
-        self.user_id = user_id
+        self.title          = title
+        self.text           = text
+        self.user_id        = user_id
 
     def __repr__(self):
         return f"Post ID: {self.id} -- Date: {self.date} -- {self.title}"

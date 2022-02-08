@@ -41,9 +41,10 @@ To initiate db (cutover), run:
 </ul>
 
 
-
-
-
+<code>flask db init</code>
+to initiate and mograte our models the database
+<code>flask db migrate -m "first migration"</code>
+<code>flask db upgrade</code>
 
 <h4>(Windows)Personnal issues encountered and turnaroud:</h4>
 
