@@ -26,6 +26,7 @@ let i = 0;
 
 window.onload = ()=>{
 let iniColl = document.querySelectorAll(".collapsible");
+
 iniColl.forEach(function(c){
         c.classList.add("active");
         let iniCont = c.nextElementSibling;

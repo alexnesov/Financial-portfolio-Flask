@@ -1,13 +1,15 @@
-from flask import render_template, Response, redirect, request, url_for, flash
-from flask_login import login_user, login_required, logout_user
+from flask_login import login_user, current_user, logout_user, login_required
+from flask import render_template, url_for, flash, redirect, request, Blueprint, Response
+
 from wtforms import TextField, Form
 import os, json, plotly
 from datetime import datetime
 import numpy as np
 
 from SV import app, db
-from SV.models import User
-from SV.forms import LoginForm, RegistrationForm
+from SV.models import User, TradingIdea
+from SV.users.forms import LoginForm, RegistrationForm, UpdateUserForm
+from SV.users.picture_handler import add_profile_pic
 from utils.db_manage import std_db_acc_obj, QuRetType
 from utils.fetchData import fetchSignals, fetchTechnicals, fetchOwnership, sp500evol
 from utils.graphs import makeOwnershipGraph, lineNBSignals
@@ -20,6 +22,10 @@ import plotly.express as px
 
 strToday = str(datetime.today().strftime('%Y-%m-%d'))
 magickey = os.environ.get('magickey')
+
+
+
+users = Blueprint('users', __name__)
 
 
 class SearchForm(Form):
