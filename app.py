@@ -1,7 +1,8 @@
-from cProfile import Profile
-import profile
 from flask_login import login_user, current_user, logout_user, login_required
 from flask import render_template, url_for, flash, redirect, request, Blueprint, Response
+
+from flask_socketio import SocketIO, send
+
 
 from wtforms import TextField, Form
 import os, json, plotly
@@ -25,6 +26,7 @@ import plotly.express as px
 strToday = str(datetime.today().strftime('%Y-%m-%d'))
 magickey = os.environ.get('magickey')
 
+socketio = SocketIO(app, cors_allowed_origins='*')
 
 
 
@@ -38,6 +40,11 @@ class SearchForm(Form):
     mW                  = TextField('mW', id='mW')
     validChartSignal    = TextField('validChartSignal', id='validChartSignal')
 
+
+@socketio.on('message')
+def handleMessage(msg):
+	print('Message: ' + msg)
+	send(msg, broadcast=True)
 
 
 @app.route('/')
