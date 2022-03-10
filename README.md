@@ -41,8 +41,10 @@ To initiate db (cutover), run:
 </ul>
 
 
+## Steps to add new DB models (use case: articles)
+
 <code>flask db init</code>
-to initiate and mograte our models the database
+to initiate and migrate our models the database
 <code>flask db migrate -m "first migration"</code>
 <code>flask db upgrade</code>
 
