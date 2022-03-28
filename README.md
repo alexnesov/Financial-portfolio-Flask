@@ -1,4 +1,13 @@
-Deployment w. AWS Beanstalk. Backend w. AWS RDS MySQL. First Flask project (Python, Bootstrap, HTML, CSS,...). Aim is to build a web app that connects to different API's. Will gather data from diverse web sources, synthesize and display the competitive arenas for every chosen stock.
+Deployment w. AWS Beanstalk. Backend w. AWS RDS MySQL. First Flask project (Python, Bootstrap, HTML, CSS,...). Aim is to build a web app that connects to different API's.
+
+
+
+<b>GTS is: </b>
+1. An autonomous market data feeder powered by Python, Jenkins/Cron and Linux. A stock market data platform accessible via a own developed front-end.
+2. An autonomous technical signals detector
+
+
+
 The app integrates a user authentication procedure.
 
 <h4> Command to create virtual env (VS code, Ubuntu 20) </h4>
