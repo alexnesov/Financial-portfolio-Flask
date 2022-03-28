@@ -48,9 +48,9 @@ To initiate db (cutover), run:
 	<li>Implement a more granular scale than the current price tri-partition in /table page</li>
 </ul>
 
-<h4> Notes to myself: </h4>
+## Notes to myself: 
 
-## Steps to add new DB models (use case: articles)
+<h4> Steps to add new DB models (use case: articles) </h4>
 
 <code>flask db init</code>
 to initiate and migrate our models the database
