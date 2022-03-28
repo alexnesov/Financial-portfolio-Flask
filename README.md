@@ -41,7 +41,6 @@ To initiate db (cutover), run:
 	https://www.optionsprofitcalculator.com/calculator/long-call.html
 	https://optionstrat.com/
 	</p>
-	
 	<li>Peers Seekingalpha</li>
     	<li>RTVS detector + visualization of normality</lI>
     	<li>API connection w. EC2 to check infra. health</li>
@@ -49,6 +48,7 @@ To initiate db (cutover), run:
 	<li>Implement a more granular scale than the current price tri-partition in /table page</li>
 </ul>
 
+<h4> Notes to myself: </h4>
 
 ## Steps to add new DB models (use case: articles)
 
@@ -117,4 +117,4 @@ https://aws.amazon.com/premiumsupport/knowledge-center/s3-large-file-uploads/
 
 </br>
 
-How to add table models
+How to add table models (to come):
