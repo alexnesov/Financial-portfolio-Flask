@@ -14,7 +14,7 @@ To initiate db (cutover), run:
 ```python3 db_create.py```
 <h4> Infrastructure </h4>
 
-![alt text](SV/static/signal_flow_na.png)
+<img src="https://github.com/alexnesov/Get-the-signals/blob/8dab1ac794c2fe0524169f6ca1cd316cad621bf1/SV/static/signal_flow_na2.png">
 
 ![alt text](SV/static/dash.png)
 
