@@ -51,7 +51,7 @@ def lineNBSignals(dfitems, spData):
 
     fig.update_traces(line_width=1.5)
     fig.update_layout(
-    #title=f'Evolution of the number of signals over time',
+    title=f'Evolution of the number of signals over time',
     plot_bgcolor='rgba(0,0,0,0)',
     )
 
@@ -198,22 +198,10 @@ def makeLinesSignal(tick):
 
 def makeOwnershipGraph(items, tick):
 
-    names = ["No",
-             "Ticker",
-             "MarketCap",
-             "SharesOutstanding", 
-             "SharesFloat", 
-             "InsiderOwnership",
-             "InsiderTransactions",
-             "InstitutionalOwnership", 
-             "InstitutionalTransactions", 
-             "FloatShort", 
-             "ShortRatio", 
-             "AverageVolume", 
-             "Price", 
-             "Change", 
-             "Volume",
-             "Date"]
+
+    names = ["No","Ticker","MarketCap","SharesOutstanding","SharesFloat","InsiderOwnership",\
+        "InsiderTransactions","InstitutionalOwnership","InstitutionalTransactions","FloatShort",\
+            "ShortRatio","AverageVolume","Price","Change","Volume","Date"]
 
     df = TuplesToDF(items)
     df = renameCols(df,names)
@@ -221,17 +209,17 @@ def makeOwnershipGraph(items, tick):
     # Create figure with secondary y-axis
     fig = make_subplots(specs=[[{"secondary_y": True}]])
 
-    fig.add_trace(go.Scatter(x=df['Date'], y = df['Price'],
-                    mode = 'lines+markers',
-                    name = 'Price'),secondary_y=True,)
+    fig.add_trace(go.Scatter(x=df['Date'], y=df['Price'],
+                    mode='lines+markers',
+                    name='Price'),secondary_y=True,)
 
-    fig.add_trace(go.Scatter(x = df.Date, y = df['InstitutionalTransactions'], \
+    fig.add_trace(go.Scatter(x=df.Date, y=df['InstitutionalTransactions'], \
         name='InstitutionalTransactions', mode='lines+markers',marker_size=4,
     line=dict(color='firebrick')),secondary_y=False,)
 
-    fig.add_trace(go.Scatter(x = df.Date, y = df['FloatShort'], \
-    name = 'FloatShort', mode = 'lines+markers', marker_size = 4,
-    line=dict(color = '#9467bd',dash = 'dash')),secondary_y = False,)
+    fig.add_trace(go.Scatter(x=df.Date, y=df['FloatShort'], \
+    name='FloatShort', mode='lines+markers',marker_size=4,
+    line=dict(color='#9467bd',dash='dash')),secondary_y=False,)
 
     fig.update_yaxes(title_text="<b> Price ($) </b>", secondary_y=True)
     fig.update_yaxes(title_text="<b> InstitutionalTransactions <br> & FloatShort (%)</b>", secondary_y=False)

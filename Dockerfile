@@ -1,5 +1,5 @@
 FROM python:3.8.0-slim
-LABEL maintainer alexandrenesovic@gmail.com
+LABEL maintainer alexnesovic@getthesignals.com
 
 ARG aws_db_endpoint
 ARG aws_db_pass

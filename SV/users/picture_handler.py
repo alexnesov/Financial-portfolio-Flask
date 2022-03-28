@@ -22,3 +22,6 @@ def add_profile_pic(pic_upload,username):
     pic.save(filepath)
 
     return storage_filename
+
+
+
