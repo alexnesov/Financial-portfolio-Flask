@@ -3,26 +3,15 @@ Deployment w. AWS Beanstalk. Backend w. AWS RDS MySQL. First Flask project (Pyth
 
 
 <b>GTS is: </b>
-1. An autonomous market data feeder powered by Python, Jenkins/Cron and Linux. A stock market data platform accessible via a own developed front-end.
+1. An autonomous market data feeder powered by Python, Jenkins/Cron and Linux. A stock market data platform accessible via a own developed front-end. The app integrates a user authentication procedure. 
 2. An autonomous technical signals detector
 
 
 <h2>Disclaimer</h2>
 <p><b>Project started long time ago, code is neither production grade, neither enterprise level grade. Shows general capabilities and interests more than commercial experience.</b></p>
 
-The app integrates a user authentication procedure.
 
-<h4> Command to create virtual env (VS code, Ubuntu 20) </h4>
-<p>In <strong>project root dir</strong> open command line:</p>
 
-```
-python3 -m venv .sversus
-source .sversus/bin/activate
-```
-
-To initiate db (cutover), run:
-
-```python3 db_create.py```
 <h4> Infrastructure </h4>
 
 <img src="https://github.com/alexnesov/Get-the-signals/blob/8dab1ac794c2fe0524169f6ca1cd316cad621bf1/SV/static/signal_flow_na2.png">
@@ -51,6 +40,19 @@ To initiate db (cutover), run:
 </ul>
 
 ## Notes to myself: 
+
+
+<h4> Command to create virtual env (VS code, Ubuntu 20) </h4>
+<p>In <strong>project root dir</strong> open command line:</p>
+
+```
+python3 -m venv .sversus
+source .sversus/bin/activate
+```
+
+To initiate db (cutover), run:
+
+```python3 db_create.py```
 
 <h4> Steps to add new DB models (use case: articles) </h4>
 
