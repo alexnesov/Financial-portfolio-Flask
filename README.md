@@ -7,6 +7,8 @@ Deployment w. AWS Beanstalk. Backend w. AWS RDS MySQL. First Flask project (Pyth
 2. An autonomous technical signals detector
 
 
+<h2>Disclaimer</h2>
+<p><b>Project started long time ago, code is neither production grade, neither enterprise level grade. Shows general capabilities and interests more than commercial experience.</b></p>
 
 The app integrates a user authentication procedure.
 
