@@ -11,7 +11,6 @@ Deployment w. AWS Beanstalk. Backend w. AWS RDS MySQL. First Flask project (Pyth
 <p><b>Project started long time ago, code is neither production grade, neither enterprise level grade. Shows general capabilities and interests more than commercial experience.</b></p>
 
 
-
 <h4> Infrastructure </h4>
 
 <img src="https://github.com/alexnesov/Get-the-signals/blob/8dab1ac794c2fe0524169f6ca1cd316cad621bf1/SV/static/signal_flow_na2.png">

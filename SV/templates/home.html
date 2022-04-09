@@ -29,11 +29,9 @@
                 <div class="home-inner container-fluid" style="padding-right: 20%; padding-left: 20%;">
                     <div class="row">
                         <div class="col-sm">
-                            <div class="card-body">
+                            <div class="card-body" style="flex: none;">
                                 <h5 class=" display-4">GTS systems</h5>
-                            </br>
-
-
+                                </br>
                                 <div style="padding-left: 0%; cursor: pointer;" class="container">
                                     <div class="card">
                                       <div class="content">
@@ -48,7 +46,6 @@
                                     </div>
                                 </div>
                                 </br>
-                                  
                                 <div style="padding-left: 0%; cursor: pointer;" class="container">
                                     <div class="card">
                                       <div class="content">
@@ -63,10 +60,8 @@
                                     </div>
                                 </div>
                                 </br>
-
                                 <div style="padding-left: 0%; cursor: pointer;" class="container">
                                     <div class="card">
-
                                       <div class="content">
                                         <div align="justify" style="margin: 3%;">
                                             <a href="/table" style="all: unset;">
@@ -75,38 +70,19 @@
                                             This service provides the tools for automatic risk calculations for a given
                                             portfolio. Portfolio and parameters can be saved in your personnal space.
                                         </div>
-                                      </div>
-                                    </div>
-                                  </div>
+                                      </div> <!--Content-->
+                                    </div> <!--Card-->
+                                  </div> <!--Container-->
+                            </div> <!--Card -->
+                        </div> <!--Col -->
 
-                                  <!--
-                                </br>
-
-                                  <div style="padding-left: 0%; cursor: pointer;" class="container">
-                                    <div class="card">
-                                        <div class="content">
-                                            <div align="justify" style="margin: 3%;">
-                                                <a href="/crypto" style="all: unset;">
-                                                <h4 style="margin: 0%;">Blockchain</h4>
-                                                <hr>
-                                                GTS powers a blockchain system. From peer-to-peer and decentralized proof-of-work system,
-                                                to block mining and real-time chain monitoring capabilities.</a> 
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            -->
-
-                        </div>
-                        <div class="col-sm">
-                            <div class="card-body text-center">
-                                {% if current_user.is_authenticated %}
-                                <p class="lead text-right">Hi {{current_user.username}}</p>
-                                {% else %}
-                                <p class="lead text-right">Please <b>login</b></p>
-                                {% endif %}
-                            </div>
+                    <div class="col-sm align-self-end">
+                        <div class="card-body text-center">
+                            {% if current_user.is_authenticated %}
+                            <p class="lead text-right">Hi {{current_user.username}}</p>
+                            {% else %}
+                            <p class="lead text-right">Please <b>login</b></p>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
