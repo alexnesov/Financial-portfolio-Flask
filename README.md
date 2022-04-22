@@ -1,45 +1,11 @@
-Deployment w. AWS Beanstalk. Backend w. AWS RDS MySQL. First Flask project (Python, Bootstrap, HTML, CSS,...). Aim is to build a web app that connects to different API's.
+![This package is currently under development.](https://img.shields.io/badge/under-development-orange.svg)
 
+The full and expanded version of this project is private.</br>
+Please contact alexnesovic@getthesignals.com for further information.
+</br>
 
-
-<b>GTS is: </b>
-1. An autonomous market data feeder powered by Python, Jenkins/Cron and Linux. A stock market data platform accessible via a own developed front-end. The app integrates a user authentication procedure. 
-2. An autonomous technical signals detector
-
-
-<h2>Disclaimer</h2>
-<p><b>Project started long time ago, code is neither production grade, neither enterprise level grade. Shows general capabilities and interests more than commercial experience.</b></p>
-
-
-<h4> Infrastructure </h4>
-
-<img src="https://github.com/alexnesov/Financial-portfolio-advanced/blob/main/SV/static/signal_flow_na2.png">
-
-![alt text](SV/static/dash.png)
-
-![alt text](SV/static/Structuring_Code.png)
-
-
-<h4> To do: </h4>
-
-<ul>
-	<li>Portfolio builder, also have evol for a set of tickers for a given holding period</li>
-	<li>Option chains integration</li>
-	<li>Put/call ratio integration</li>
-	<p>
-	https://stock-screener.org/options-profit-calculator.aspx
-	https://www.optionsprofitcalculator.com/calculator/long-call.html
-	https://optionstrat.com/
-	</p>
-	<li>Peers Seekingalpha</li>
-    	<li>RTVS detector + visualization of normality</lI>
-    	<li>API connection w. EC2 to check infra. health</li>
-	<li>Macro sector & industry cycles in macro pages</li>
-	<li>Implement a more granular scale than the current price tri-partition in /table page</li>
-</ul>
-
-## Notes to myself: 
-
+Deployment w. AWS Beanstalk. Backend w. AWS RDS MySQL. Server running with Flask (Python, Bootstrap, HTML, CSS, JavaScript, incl. JQuery and AJAX routines). Connects to different market data API's. Gathers and synthetizes the data. Will synthesize and display the competitive arenas for every chosen stock.
+The app integrates a user authentication procedure.
 
 <h4> Command to create virtual env (VS code, Ubuntu 20) </h4>
 <p>In <strong>project root dir</strong> open command line:</p>
@@ -52,13 +18,32 @@ source .sversus/bin/activate
 To initiate db (cutover), run:
 
 ```python3 db_create.py```
+<h4> Infrastructure </h4>
 
-<h4> Steps to add new DB models (use case: articles) </h4>
+![alt text](SV/static/signal_flow_na2.png)
 
-<code>flask db init</code>
-to initiate and migrate our models the database
-<code>flask db migrate -m "first migration"</code>
-<code>flask db upgrade</code>
+![alt text](SV/static/dash.png)
+
+![alt text](SV/static/Structuring_Code.png)
+
+
+<h4> To do: </h4>
+
+<ul>
+	<li>Portfolio builder, also have evol for a set of tickers for a given holding period</li>
+	<li>Option chains integration</li>
+	<li>Put/call ratio integration</li>
+	<li>Peers Seekingalpha</li>
+    	<li>RTVS detector + visualization of normality</lI>
+    	<li>API connection w. EC2 to check infra. health</li>
+	<li>Macro sector & industry cycles in macro pages</li>
+	<li>Implement a more granular scale than the current price tri-partition in /table page</li>
+</ul>
+
+
+
+
+
 
 <h4>(Windows)Personnal issues encountered and turnaroud:</h4>
 
@@ -71,16 +56,16 @@ to initiate and migrate our models the database
 
 <h4> Dockerization of the app </h4> </br>
 In the app folder, run the following command: </br>
-<code>docker run -it --name signalnoise -p 5000:5000 -v ${PWD}:/app python:3.7 bash</code>
+<code>docker run -it --name gts -p 5000:5000 -v ${PWD}:/app python:3.7 bash</code>
 </br>
 <code>pip install -r requirements.txt</code>
 </br>
 </br>
 Start specific container after exit: </br>
-<code>docker start `docker ps -a -q --filter "name=signalnoise"`</code>
+<code>docker start `docker ps -a -q --filter "name=gts"`</code>
 </br>
 To get into a Docker container's shell:</br>
-<code>docker exec -it signalnoise bash</code>
+<code>docker exec -it gts bash</code>
 </br>
 Stop all containers:
 <code>docker stop $(docker ps -aq)</code></br>
@@ -88,15 +73,18 @@ Stop all containers:
 
 
 Building the image:</br>
-<code>docker build -t signalnoise .</code>
+<code>docker build -t gts .</code>
 </br>
 Running the image:</br>
-<code>docker run -e aws_db_endpoint='<DNS>' -e aws_db_pass='<password>' -e aws_db_user='<password>' -p 5000:5000 signalnoise</code>
+<code>docker run -e aws_db_endpoint='<DNS>' -e aws_db_pass='<password>' -e aws_db_user='<password>' -p 5000:5000 gts</code>
 </br>
 </br>
 Other useful instructions:</br>
 <code>docker container ls</code></br>
 <code>docker image ls</code></br>
+Purging All Unused or Dangling Images, Containers, Volumes, and Networks:
+<code>docker system prune -a</code></br>
+
 
 <h4> General considrations about Docker</h4>
 <ul>
@@ -115,9 +103,3 @@ https://stackoverflow.com/questions/15077489/static-assets-dont-show-up-for-flas
 
 Regarding big files upload towards S3:</br>
 https://aws.amazon.com/premiumsupport/knowledge-center/s3-large-file-uploads/
-
-
-
-</br>
-
-How to add table models (to come):
