@@ -1,6 +1,5 @@
 ![This package is currently under development.](https://img.shields.io/badge/under-development-orange.svg)
 
-The full and expanded version of this project is private.</br>
 Please contact alexnesovic@getthesignals.com for further information.
 </br>
 
