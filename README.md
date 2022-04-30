@@ -1,10 +1,17 @@
 ![This package is currently under development.](https://img.shields.io/badge/under-development-orange.svg)
 
-The full and expanded version of this project is private.</br>
 Please contact alexnesovic@getthesignals.com for further information or for a demo
 </br>
 
-Deployment w. AWS Beanstalk. Backend w. AWS RDS MySQL. Server running with Flask (Python, Bootstrap, HTML, CSS, JavaScript, incl. JQuery and AJAX routines). Connects to different market data API's. Gathers and synthetizes the data. Will synthesize and display the competitive arenas for every chosen stock.
+<ul>
+	<li>Deployment with AWS Beanstalk + Docker
+	<li>DB: AWS RDS MySQL
+	<li>Backend-server: Python-Flask
+	<li>Frontend: HTML, CSS, Bootstrap, JavaScript, incl. JQuery and AJAX routines 
+</ul>
+<br>
+**What does it do?**
+Connects to different market data API's. Gathers and synthetizes the data. Will synthesize and display the competitive arenas for every chosen stock.
 The app integrates a user authentication procedure.
 
 <h4> Command to create virtual env (VS code, Ubuntu 20) </h4>
