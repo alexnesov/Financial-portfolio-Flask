@@ -10,6 +10,7 @@ Please contact alexnesovic@getthesignals.com for further information or for a de
 	<li>Frontend: HTML, CSS, Bootstrap, JavaScript, incl. JQuery and AJAX routines 
 </ul>
 <br>
+
 **What does it do?**
 Connects to different market data API's. Gathers and synthetizes the data. Will synthesize and display the competitive arenas for every chosen stock.
 The app integrates a user authentication procedure.
