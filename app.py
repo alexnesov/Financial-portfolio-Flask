@@ -147,14 +147,16 @@ def account():
         form.email.data = current_user.email
 
     profile_image = url_for('static', filename='profile_pics/' + current_user.profile_image)
+    
     return render_template('account.html', profile_image=profile_image, form=form)
 
 
 @app.route("/<username>")
 def user_posts(username):
-    page = request.args.get('page',1,type=int)
-    user = User.query.filter_by(username=username).first_or_404()
-    blog_posts = TradingIdea.query.filter_by(author=user).order_by(TradingIdea.date.desc()).paginate(page=page, per_page=5)
+    page        = request.args.get('page',1,type=int)
+    user        = User.query.filter_by(username=username).first_or_404()
+    blog_posts  = TradingIdea.query.filter_by(author=user).order_by(TradingIdea.date.desc()).paginate(page=page, per_page=5)
+    
     return render_template('user_blog_posts.html', blog_posts=blog_posts, user=user)
 
 
@@ -373,19 +375,6 @@ def get_sectors_evols():
                                                                     ascending=False)
                                                                     )
 
-    print(df_sector_evols_grped_sec)
-
-    """
-    fig     = px.treemap(df_sector_evols, 
-                        path=[px.Constant("American Stock Market (average made out of 5560 stocks)"), 
-                        'Sector', 'Industry'], 
-                        values                      ='Perf_360',
-                        color                       ='Perf_360', 
-                        hover_data                  = ['Industry'],
-                        color_continuous_scale      = 'YlGn')
-    """
-
-    animals=['giraffes', 'orangutans', 'monkeys']
 
     fig = go.Figure([go.Bar(x=df_sector_evols_grped_sec.Sector, 
                             y=df_sector_evols_grped_sec[f'{interval}'])])

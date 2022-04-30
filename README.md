@@ -1,7 +1,11 @@
 ![This package is currently under development.](https://img.shields.io/badge/under-development-orange.svg)
 
+<<<<<<< HEAD
 The full and expanded version of this project is private.</br>
 Please contact alexnesovic@getthesignals.com for further information or for a demo
+=======
+Please contact alexnesovic@getthesignals.com for further information.
+>>>>>>> 860f77672243be5594ba05e18f4ac4a6b24684ab
 </br>
 
 Deployment w. AWS Beanstalk. Backend w. AWS RDS MySQL. Server running with Flask (Python, Bootstrap, HTML, CSS, JavaScript, incl. JQuery and AJAX routines). Connects to different market data API's. Gathers and synthetizes the data. Will synthesize and display the competitive arenas for every chosen stock.
