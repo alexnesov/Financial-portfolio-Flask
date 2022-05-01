@@ -27,7 +27,7 @@ def get_sectors_evols():
 
     interval = request.args["interval"]
 
-    print('interval: ', interval)
+    print('User selected interval: ', interval)
 
 
     qu = "SELECT * FROM marketdata.sectorEvols"

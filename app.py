@@ -16,8 +16,6 @@ from utils.graphs import makeOwnershipGraph, lineNBSignals
 from app_signals import page_signals
 from app_macro import page_macro
 
-import plotly
-import plotly.graph_objs as go
 
 strToday    = str(datetime.today().strftime('%Y-%m-%d'))
 magickey    = os.environ.get('magickey')

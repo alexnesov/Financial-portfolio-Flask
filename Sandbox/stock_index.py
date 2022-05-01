@@ -10,7 +10,21 @@ sys.path.append(PROJECT_ROOT)
 from utils.db_manage import QuRetType, dfToRDS, std_db_acc_obj
 
 
-def get_historical_stock_prices(stock_exchange: str):
+Sectors = ['Healthcare', 
+            'Basic Materials', 
+            'Industrials', 
+            'Consumer Cyclical', 
+            'Real Estate', 
+            'Financial',
+            'Consumer Defensive',
+            'Technology',
+            'Utilities',
+            'Communication Services',
+            'Energy']
+
+
+
+def get_historical_stock_prices(stock_exchange: str) -> pd.DataFrame:
     """
     :param stock_exchange: ex: "NASDAQ"
     """
@@ -24,7 +38,7 @@ def get_historical_stock_prices(stock_exchange: str):
     return df_hist_prices
 
 
-def get_sectors_info():
+def get_sectors_info() -> pd.DataFrame:
     """
     """
     qu_sectors                  = "SELECT * FROM marketdata.sectors"
@@ -36,7 +50,7 @@ def get_sectors_info():
     return df_sectors
 
 
-def enrich_sect_info(df_hist_prices: pd.DataFrame, df_sectors: pd.DataFrame): 
+def enrich_sect_info(df_hist_prices: pd.DataFrame, df_sectors: pd.DataFrame) -> pd.DataFrame: 
     """
     Enriching with sector information
     
@@ -63,30 +77,52 @@ def enrich_sect_info(df_hist_prices: pd.DataFrame, df_sectors: pd.DataFrame):
 
 
 
+
+
+
 if __name__ == '__main__':
-    db_acc_obj      = std_db_acc_obj() 
-    df_hist_prices  = get_historical_stock_prices("NYSE")
+    db_acc_obj              = std_db_acc_obj() 
+    df_hist_prices          = get_historical_stock_prices("NYSE")
     print(df_hist_prices)
-    df_sectors      = get_sectors_info()
-    df_enriched     = enrich_sect_info(df_hist_prices, df_sectors)
+    df_sectors              = get_sectors_info()
+    df_enriched             = enrich_sect_info(df_hist_prices, df_sectors)
     print(df_enriched)
+    df_enriched_reduced     = df_enriched.iloc[::2, :] # keep every nth row only
+
+    # Making a dict of dataframes
+    dict_dfs_sectors        = {}
+    for sector in Sectors:
+        print(sector)
+        dict_dfs_sectors[sector] = df_enriched_reduced.loc[df_enriched_reduced['Sector'] == sector]
+        print(sector, '\n', dict_dfs_sectors[sector])
+
+
+    def get_average_stock_price_day(df_enriched_reduced: pd.DataFrame) -> pd.DataFrame:
+        """
+        Calculating average stock price for a given sector per day
+        Goal: get it's evolution through time
+
+        To do: Implement a weigthed oned relatively to Market Value of company behind ticker
+        """
+        
+        df                      = dict_dfs_sectors[sector]
+        unique_dates            = df['Date'].unique().tolist()
+        dict_date_price_average = {}
+
+
+        for date in unique_dates:
+            print(date)
+            price_average                   = df.loc[df['Date'] == date]['Close'].mean()
+            dict_date_price_average[date]   = price_average 
+        
+        return 
+        
+        test = pd.DataFrame(dict_date_price_average, index = ['Avg_price']).transpose().sort_index()
 
 
 
 
 
 
-
-"""
-import plotly.express as px
-df = px.data.stocks()
-fig = px.line(df,
-              x             = "date", 
-              y             = df.columns,
-              hover_data    = {"date": "|%B %d, %Y"},
-              title         = 'custom tick labels')
-fig.update_xaxes(
-    dtick       = "M1",
-    tickformat  = "%b\n%Y")
+fig = px.line(test, x=test.index, y="Avg_price")
 fig.show()
-"""
