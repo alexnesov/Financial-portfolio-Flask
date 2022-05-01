@@ -1,10 +1,14 @@
 import pandas as pd
 import os, sys
 
-
-
 from utils.db_manage import QuRetType, dfToRDS, std_db_acc_obj
 
+
+PROJECT_ROOT = os.path.abspath(os.path.join(
+               os.path.dirname(__file__),
+               os.pardir))
+
+sys.path.append(PROJECT_ROOT)
 
 
 
