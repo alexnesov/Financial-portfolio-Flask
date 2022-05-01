@@ -38,6 +38,8 @@ def enrich_sect_info(df_hist_prices: pd.DataFrame):
     """
     Enriching with sector information
     
+    Not doing enrichment withing SQL RDS database because ram is very low (to lower cost), whereas way stronger on personnal
+    computer and on AWS EC2. Therefore doing more complex ops on VM.
     Output ex:
             Symbol        Date  Close                     Company      Sector                Industry\
     0            A  2020-01-01  85.31  Agilent Technologies, Inc.  Healthcare  Diagnostics & Research\
