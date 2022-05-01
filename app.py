@@ -5,17 +5,16 @@ from wtforms import TextField, Form
 
 from datetime import datetime
 import os
-import json
 
 from SV import app, db
 from SV.models import User, TradingIdea
 from SV.users.forms import LoginForm, RegistrationForm, UpdateUserForm
 from SV.users.picture_handler import add_profile_pic
-from utils.db_manage import std_db_acc_obj, QuRetType
+from utils.db_manage import std_db_acc_obj
 from utils.fetchData import fetchSignals, fetchTechnicals, fetchOwnership, sp500evol
 from utils.graphs import makeOwnershipGraph, lineNBSignals
-from utils.db_manage import std_db_acc_obj
 from app_signals import page_signals
+from app_macro import page_macro
 
 import plotly
 import plotly.graph_objs as go
@@ -25,6 +24,7 @@ magickey    = os.environ.get('magickey')
 socketio    = SocketIO(app, cors_allowed_origins='*')
 
 app.register_blueprint(page_signals)
+app.register_blueprint(page_macro)
 
 
 class SearchForm(Form):
@@ -284,10 +284,7 @@ def submitOwnership():
     form=form, stock=text,plot=plot)
 
 
-@app.route('/macroView')
-@login_required
-def macroView():
-    return render_template('macroView.html')
+
     
 
 
@@ -354,55 +351,6 @@ def getCSV():
                  "attachment; filename=signals.csv"})
 
 
-
-
-@app.route('/api/fetchSectorEvols')
-@login_required
-def get_sectors_evols():
-
-    interval = request.args["interval"]
-
-    print('interval: ', interval)
-
-
-    qu = "SELECT * FROM marketdata.sectorEvols"
-    df_sector_evols = db_acc_obj.exc_query(db_name='marketdata', query=qu,\
-                        retres = QuRetType.ALLASPD)
-
-    df_sector_evols_grped_sec = ((df_sector_evols.groupby(['Sector']).mean())
-                                                                    .reset_index()
-                                                                    .sort_values(by=[f'{interval}'],
-                                                                    ascending=False)
-                                                                    )
-
-
-    fig = go.Figure([go.Bar(x=df_sector_evols_grped_sec.Sector, 
-                            y=df_sector_evols_grped_sec[f'{interval}'])])
-
-    fig.update_yaxes(showline       = False, 
-                    linewidth       = 1,
-                    gridwidth       = 0.2, 
-                    linecolor       = 'grey', 
-                    gridcolor       = 'rgba(192,192,192,0.5)',
-                    zeroline        = True,
-                    zerolinewidth   = 1,
-                    zerolinecolor   = 'black')
-
-    fig.update_layout(
-    plot_bgcolor    = 'rgba(0,0,0,0)',
-    legend          = dict(
-                    orientation = "h",
-                    yanchor     = "bottom",
-                    y           = 1.02,
-                    xanchor     = "right",
-                    x           = 1
-                    )
-    )
-    fig.update_layout(margin = dict(t=0, l=0, r=0, b=0))
-
-    graphJSON = json.dumps(fig, cls = plotly.utils.PlotlyJSONEncoder)
-
-    return graphJSON
 
 
 
