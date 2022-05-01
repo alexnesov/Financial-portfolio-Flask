@@ -141,10 +141,12 @@ if __name__ == '__main__':
     # df_enriched_reduced     = df_sector_enriched.iloc[::2, :] # keep every nth row only
     final_df                = get_all_sector_avg_price_evol(df_sector_enriched)
     final_df                = final_df.set_index('Date')
-    final_df_normalized     = (final_df / final_df.iloc[0] * 100)
+    final_df_normalized     = (final_df / final_df.iloc[0])
 
+    """
     fig                     = px.line(final_df_normalized, 
                                         x = final_df_normalized.index, 
                                         y = final_df_normalized.columns)
 
     fig.show()
+    """
