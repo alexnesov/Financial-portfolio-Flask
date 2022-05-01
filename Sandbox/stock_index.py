@@ -1,15 +1,13 @@
 import pandas as pd
 import os, sys
 
-from utils.db_manage import QuRetType, dfToRDS, std_db_acc_obj
-
-
 PROJECT_ROOT = os.path.abspath(os.path.join(
                os.path.dirname(__file__),
                os.pardir))
 
 sys.path.append(PROJECT_ROOT)
 
+from utils.db_manage import QuRetType, dfToRDS, std_db_acc_obj
 
 
 def get_historical_stock_prices(stock_exchange: str):
@@ -17,7 +15,7 @@ def get_historical_stock_prices(stock_exchange: str):
     :param stock_exchange: ex: "NASDAQ"
     """
     qu_historical_prices        = f"SELECT Symbol, Date, Close \
-                                FROM marketdata.{stock_exchange}"
+                                FROM marketdata.{stock_exchange}_20"
 
     df_hist_prices              = db_acc_obj.exc_query(db_name     = 'marketdata', 
                                                        query       = qu_historical_prices,
@@ -38,13 +36,13 @@ def get_sectors_info():
     return df_sectors
 
 
-def enrich_sect_info(df_hist_prices: pd.DataFrame): 
+def enrich_sect_info(df_hist_prices: pd.DataFrame, df_sectors: pd.DataFrame): 
     """
     Enriching with sector information
     
     Not doing enrichment withing SQL RDS database because ram is very low (to lower cost), whereas way stronger on personnal
     computer and on AWS EC2. Therefore doing more complex ops on VM.
-    Output ex:
+    :returns: (Example)
             Symbol        Date  Close                     Company      Sector                Industry\
     0            A  2020-01-01  85.31  Agilent Technologies, Inc.  Healthcare  Diagnostics & Research\
     1            A  2020-01-02  85.95  Agilent Technologies, Inc.  Healthcare  Diagnostics & Research\
@@ -61,14 +59,17 @@ def enrich_sect_info(df_hist_prices: pd.DataFrame):
     df_sectors                  = df_sectors.rename(columns={"Ticker":"Symbol"})
     df_enriched_quote_prices    = pd.merge(df_hist_prices, df_sectors, how="inner", on=["Symbol"])
 
+    return df_enriched_quote_prices
+
 
 
 if __name__ == '__main__':
     db_acc_obj      = std_db_acc_obj() 
-    df_hist_prices  = get_historical_stock_prices()
+    df_hist_prices  = get_historical_stock_prices("NYSE")
+    print(df_hist_prices)
     df_sectors      = get_sectors_info()
-    enrich_sect_info()
-
+    df_enriched     = enrich_sect_info(df_hist_prices, df_sectors)
+    print(df_enriched)
 
 
 
