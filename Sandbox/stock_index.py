@@ -1,5 +1,6 @@
 import pandas as pd
 import os, sys
+import plotly.express as px
 
 PROJECT_ROOT = os.path.abspath(os.path.join(
                os.path.dirname(__file__),
@@ -8,6 +9,9 @@ PROJECT_ROOT = os.path.abspath(os.path.join(
 sys.path.append(PROJECT_ROOT)
 
 from utils.db_manage import QuRetType, dfToRDS, std_db_acc_obj
+
+# rolling periof for time series smoothening
+NB_SMOOTHEN = 7
 
 
 Sectors = ['Healthcare', 
@@ -76,53 +80,71 @@ def enrich_sect_info(df_hist_prices: pd.DataFrame, df_sectors: pd.DataFrame) -> 
     return df_enriched_quote_prices
 
 
+def get_average_stock_price_day(df_sector_filtered: pd.DataFrame, sector:str) -> pd.DataFrame:
+    """
+    Calculating average stock price for a given sector per day
+    Goal: get it's evolution through time
+
+    To do: Implement a weigthed oned relatively to Market Value of company behind ticker
+
+    :param df_sector_filtered:  Stock prices, senctor enriched and filterd for a given sector
+    :param sector:              Ex: "Energy"
+    """
+    
+    unique_dates            = df_sector_filtered['Date'].unique().tolist()
+    dict_date_price_average = {}
 
 
+    for date in unique_dates:
+        print(date)
+        price_average                   = df_sector_filtered.loc[df_sector_filtered['Date'] == date]['Close'].mean()
+        dict_date_price_average[date]   = price_average 
+    
+    df_avg_quote_day            = pd.DataFrame(dict_date_price_average, index = [f'Avg_price_{sector}']).transpose().sort_index()
+    df_avg_quote_day_smoothed   = df_avg_quote_day[f'Avg_price_{sector}'].rolling(NB_SMOOTHEN).sum()
+
+    return df_avg_quote_day_smoothed
+
+
+    
+def get_all_sector_avg_price_evol(df_sector_enriched: pd.DataFrame) -> pd.DataFrame:
+    """
+    """
+    # Making a dict of dataframes
+    dict_dfs_sectors        = {}
+    init                    = True
+    final_df                = pd.DataFrame()
+
+    for sector in Sectors:
+        print(sector)
+        dict_dfs_sectors[sector]    = df_sector_enriched.loc[df_sector_enriched['Sector'] == sector]
+        df_avg_quote_day_smoothed   = get_average_stock_price_day(dict_dfs_sectors[sector], sector)
+        df_avg_quote_day_smoothed   = df_avg_quote_day_smoothed.reset_index().rename({'index':'Date'}, axis = 'columns')
+
+        if init == False:
+            final_df                = pd.merge(final_df, df_avg_quote_day_smoothed, how="inner", on=["Date"])
+        else:
+            final_df                = df_avg_quote_day_smoothed.copy()
+
+        init                        = False
+
+    return final_df.iloc[NB_SMOOTHEN-1: , :]
 
 
 if __name__ == '__main__':
     db_acc_obj              = std_db_acc_obj() 
     df_hist_prices          = get_historical_stock_prices("NYSE")
-    print(df_hist_prices)
+    
     df_sectors              = get_sectors_info()
-    df_enriched             = enrich_sect_info(df_hist_prices, df_sectors)
-    print(df_enriched)
-    df_enriched_reduced     = df_enriched.iloc[::2, :] # keep every nth row only
+    df_sector_enriched      = enrich_sect_info(df_hist_prices, df_sectors)
+    
+    # df_enriched_reduced     = df_sector_enriched.iloc[::2, :] # keep every nth row only
+    final_df                = get_all_sector_avg_price_evol(df_sector_enriched)
+    final_df                = final_df.set_index('Date')
+    final_df_normalized     = (final_df / final_df.iloc[0] * 100)
 
-    # Making a dict of dataframes
-    dict_dfs_sectors        = {}
-    for sector in Sectors:
-        print(sector)
-        dict_dfs_sectors[sector] = df_enriched_reduced.loc[df_enriched_reduced['Sector'] == sector]
-        print(sector, '\n', dict_dfs_sectors[sector])
+    fig                     = px.line(final_df_normalized, 
+                                        x = final_df_normalized.index, 
+                                        y = final_df_normalized.columns)
 
-
-    def get_average_stock_price_day(df_enriched_reduced: pd.DataFrame) -> pd.DataFrame:
-        """
-        Calculating average stock price for a given sector per day
-        Goal: get it's evolution through time
-
-        To do: Implement a weigthed oned relatively to Market Value of company behind ticker
-        """
-        
-        df                      = dict_dfs_sectors[sector]
-        unique_dates            = df['Date'].unique().tolist()
-        dict_date_price_average = {}
-
-
-        for date in unique_dates:
-            print(date)
-            price_average                   = df.loc[df['Date'] == date]['Close'].mean()
-            dict_date_price_average[date]   = price_average 
-        
-        return 
-        
-        test = pd.DataFrame(dict_date_price_average, index = ['Avg_price']).transpose().sort_index()
-
-
-
-
-
-
-fig = px.line(test, x=test.index, y="Avg_price")
-fig.show()
+    fig.show()
