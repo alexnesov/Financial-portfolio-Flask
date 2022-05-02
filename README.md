@@ -1,6 +1,6 @@
 ![This package is currently under development.](https://img.shields.io/badge/under-development-orange.svg)
 
-Please contact alexnesovic@getthesignals.com for further information or for a demo
+Please contact alexnesovic@getthesignals.com for further information, for a demo or a collab.
 </br>
 
 <ul>
