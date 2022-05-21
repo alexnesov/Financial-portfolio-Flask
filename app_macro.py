@@ -29,7 +29,6 @@ def get_sectors_evols():
 
     print('User selected interval: ', interval)
 
-
     qu = "SELECT * FROM marketdata.sectorEvols"
     df_sector_evols = db_acc_obj.exc_query(db_name='marketdata', query=qu,\
                         retres = QuRetType.ALLASPD)

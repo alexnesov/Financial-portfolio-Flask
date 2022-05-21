@@ -95,7 +95,14 @@ def makeLinesSignal():
         line=dict(color='Orange')),
                 row=7, col=1)
 
-    fig.update_yaxes(showline=False, linewidth=1,gridwidth=0.2, linecolor='grey', gridcolor='rgba(192,192,192,0.5)',zeroline=True,zerolinewidth=1,zerolinecolor='black')
+    fig.update_yaxes(showline       = False, 
+                     linewidth      = 1,
+                     gridwidth      = 0.2, 
+                     linecolor      = 'grey', 
+                     gridcolor      = 'rgba(192,192,192,0.5)',
+                     zeroline       = True,
+                     zerolinewidth  = 1,
+                     zerolinecolor  ='black')
 
 
     fig.update_traces(line_width=1.5)
@@ -131,14 +138,18 @@ def makeLinesSignal():
 
     annotations = []
 
-    annotations.append(dict(xref='paper', yref='paper', x=0, y=-0.09,
-                              xanchor='left', yanchor='top',
-                              #text='Log scale is used for vol. to have better grasp incoming vol on smaller caps',
-                              font=dict(family='Arial',
-                                        size=12,
-                                        color='rgb(150,150,150)'),
-                              showarrow=False))
-    
+    annotations.append(dict(xref    = 'paper', 
+                            yref    = 'paper', 
+                            x       = 0, 
+                            y       = -0.09,
+                            xanchor = 'left', 
+                            yanchor = 'top',
+                            #text='Log scale is used for vol. to have better grasp incoming vol on smaller caps',
+                            font=dict(family      = 'Arial',
+                                    size        = 12,
+                                    color       = 'rgb(150,150,150)'),
+                                    showarrow   = False))
+
     
     fig.update_layout(annotations=annotations)
     

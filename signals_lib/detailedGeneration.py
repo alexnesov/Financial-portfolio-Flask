@@ -99,8 +99,9 @@ def getData(tick):
 
     print(f'Getting tick data from RDS (stock exchange: {stockExchange}). . .')
     qu = f"SELECT * FROM {stockExchange}_20 WHERE Symbol = '{tick}'"
-    df = db_acc_obj.exc_query(db_name='marketdata', query=qu,\
-        retres=QuRetType.ALLASPD)
+    df = db_acc_obj.exc_query(db_name   = 'marketdata', 
+                              query     = qu,\
+                              retres    = QuRetType.ALLASPD)
 
     return df
 
@@ -142,20 +143,6 @@ def consolidateSignals(tick):
     dfStock[f'rolling_mean_{10}']       = dfStock['diff_stock_bench'].rolling(10).mean()
     dfStock[f'rolling_mean_{5}']        = dfStock['diff_stock_bench'].rolling(5).mean()
 
-    qu_gap = f"SELECT * FROM marketdata.Technicals WHERE Ticker='{tick}'"
-
-    # print('Getting the technicals')
-
-    """
-    df_gap                              = db_acc_obj.exc_query(db_name  = 'marketdata', 
-                                                               query    = qu_gap, 
-                                                               retres   = QuRetType.ALLASPD)
-
-    df_gap['Date']                      = df_gap['Date'].astype('datetime64[ns]')
-    merged                              = dfStock.merge(df_gap[['Date','Gap']], on='Date', how='left')
-
-    print(merged)
-    """
     return dfStock
 
 
