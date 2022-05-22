@@ -1,5 +1,4 @@
 
-from pandas.core.reshape.merge import merge
 from utils.db_manage import QuRetType, std_db_acc_obj
 from signals_lib.ta import aroon, rsi
 
@@ -111,8 +110,10 @@ def getsp500(DateSP='2020-01-01'):
     """
     """
     qu                  = f"SELECT Date, Close FROM marketdata.sp500 where Date>='{DateSP}'"
-    sp500df             = db_acc_obj.exc_query(db_name='marketdata', query=qu,\
-        retres=QuRetType.ALLASPD)
+    sp500df             = db_acc_obj.exc_query(db_name  = 'marketdata', 
+                                               query    = qu,\
+                                               retres   = QuRetType.ALLASPD)
+
     sp500df.Date        = pd.to_datetime(sp500df.Date)
     sp500df             = sp500df.rename(columns={'Close':'Close_sp'})
 
