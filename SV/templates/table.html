@@ -20,6 +20,8 @@
 
   <link href="../static/css/style_table.css" rel="stylesheet" type="text/css">
   <script src="../static/JS/table.js" defer></script>
+
+  <link href="../static/css/style_cli.css" rel="stylesheet" type="text/css">
 </head>
 
 <body id="Table_page" style="background-color: #f5f6f8;">
@@ -196,6 +198,20 @@
 </div> <!--CARD 3-->
 
 
+<div id="draggable" class="no-select">
+  <div class="card card_terminal" style="width: 50rem; height: 25rem; color: white;">
+      <div class="card-body scroll">
+          <div class="card-title" style="font-size: 16px;">
+          Command Line Interface - CLI</div>
+          <h6 class="card-subtitle mb-2 text-muted"></h6>
+          <p class="card-text">
+              <span class="terminal_content"></span>
+                user@gts-systems ><input type="text" class="input_terminal" style="width: 35rem;">
+          </p>
+      </div>
+  </div>
+</div>
+
 
 
 
@@ -205,6 +221,7 @@ To do:
 - If we don't know how to filter, let's take the intuitively best solution among the signals.
 Let's implement fundamentals. --> opportunity to levrage UI.
 
+<script src="../static/JS/cli.js"></script>
 
 <script>
   let coll = document.getElementsByClassName("collapsible");
