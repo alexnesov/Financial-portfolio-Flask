@@ -30,7 +30,9 @@ At root dir type:<br>
 ### To initiate db (cutover), run:
 
 ```python3 db_create.py```
-<h4> Infrastructure </h4>
+
+
+### Infrastructure diagram 
 
 ![alt text](SV/static/signal_flow_na2.png)
 
