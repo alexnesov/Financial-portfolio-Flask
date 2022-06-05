@@ -22,11 +22,12 @@ The app integrates a user authentication procedure.
 python3 -m venv .sversus
 source .sversus/bin/activate
 ```
-## Testing
+### Testing
 
+At root dir type:<br>
 <code>python -m pytest tests/</code>
 
-To initiate db (cutover), run:
+### To initiate db (cutover), run:
 
 ```python3 db_create.py```
 <h4> Infrastructure </h4>
