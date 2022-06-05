@@ -22,6 +22,9 @@ The app integrates a user authentication procedure.
 python3 -m venv .sversus
 source .sversus/bin/activate
 ```
+## Testing
+
+<code>python -m pytest tests/</code>
 
 To initiate db (cutover), run:
 
