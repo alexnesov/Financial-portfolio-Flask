@@ -3,13 +3,6 @@ from flask_login import UserMixin
 from datetime import datetime
 from SV import db
 
-"""
-# The user_loader decorator allows flask-login to load the current user
-# and grab their id.
-@login_manager.user_loader
-def load_user(user_id):
-    return User.query.get(user_id)
-"""
 
 class User(db.Model, UserMixin):
 

@@ -21,10 +21,10 @@
               <div class="item">
                 <a class="sub-btn"><i class="fas fa-users-cog"></i>Admin<i class="fas fa-arrow-down dropdown"></i></a>
                       <div class="sub-menu">
-                          <a href="{{ url_for('account') }}" class="sub-item">Account</a>  
-                          <a href="{{ url_for('investInfra') }}" class="sub-item">Investment Infrastructure</a>  
-                          <a href="{{ url_for('pipelines') }}" class="sub-item">Pipelines</a>    
-                          <a href="{{ url_for('investInfra') }}" class="sub-item">Data Structures</a>    
+                          <a href="{{ url_for('page_all.account') }}" class="sub-item">Account</a>  
+                          <a href="{{ url_for('page_all.investInfra') }}" class="sub-item">Investment Infrastructure</a>  
+                          <a href="{{ url_for('page_all.pipelines') }}" class="sub-item">Pipelines</a>    
+                          <a href="{{ url_for('page_all.investInfra') }}" class="sub-item">Data Structures</a>    
                       </div>
             </div>
               <div class="item"><a href="{{ url_for('page_macro.macroView') }}"><i class="fas fa-globe"></i>Macro View</a></div>
@@ -33,26 +33,26 @@
               <div class="item">
                   <a class="sub-btn"><i class="fas fa-braille"></i>Data<i class="fas fa-arrow-down dropdown"></i></a>
                         <div class="sub-menu">
-                            <a href="{{ url_for('technicals') }}" class="sub-item">Technicals</a>    
-                            <a href="{{ url_for('ownership') }}" class="sub-item">Ownership</a>    
+                            <a href="{{ url_for('page_all.technicals') }}" class="sub-item">Technicals</a>    
+                            <a href="{{ url_for('page_all.ownership') }}" class="sub-item">Ownership</a>    
                         </div>
               </div>
               <div class="item">
                 <a class="sub-btn"><i class="fas fa-broadcast-tower"></i>Signals<i class="fas fa-arrow-down dropdown"></i></a>
                       <div class="sub-menu">
-                          <a href="{{ url_for('table') }}"></i>Reversal</a>
-                          <a href="{{ url_for('table') }}"></i>Short</a>
+                          <a href="{{ url_for('page_all.table') }}"></i>Reversal</a>
+                          <a href="{{ url_for('page_all.table') }}"></i>Short</a>
                       </div>
               </div>
-              <div class="item"><a href="{{ url_for('portfolios') }}"><i class="fas fa-wallet"></i>Portfolios <font color="#32CD32">(to come)</font></a></div>
-              <div class="item"><a href="{{ url_for('ideas') }}"><i class="fas fa-lightbulb"></i>Trading Ideas</font></a></div>
+              <div class="item"><a href="{{ url_for('page_all.portfolios') }}"><i class="fas fa-wallet"></i>Portfolios <font color="#32CD32">(to come)</font></a></div>
+              <div class="item"><a href="{{ url_for('page_all.ideas') }}"><i class="fas fa-lightbulb"></i>Trading Ideas</font></a></div>
               <div class="item"><a href="#"><i class="fas fa-book"></i>Buffet <font color="#32CD32">(to come)</font></a></div>
               <div class="item"><a href="#"><i class="fas fa-chart-line"></i>Options Monitoring</a></div>
               <div class="item"><a href="/crypto"><i class="fab fa-bitcoin"></i>Crypto</a></div>
               <div class="item">
                 <a class="sub-btn"><i class="fas fa-square-root-alt"></i>Quantitative finance<i class="fas fa-arrow-down dropdown"></i></a>
                       <div class="sub-menu">
-                          <a href="{{ url_for('brownian') }}"></i>Brownian Motion</a>
+                          <a href="{{ url_for('page_all.brownian') }}"></i>Brownian Motion</a>
                       </div>
               </div>
 

@@ -24,28 +24,28 @@
         
            
             <!--https://stackoverflow.com/questions/8676455/flask-current-page-in-request-variable --> 
-                <a href="{{ url_for('home') }}" class="navbar-brand">GTS</a>
+                <a href="{{ url_for('page_all.home') }}" class="navbar-brand">GTS</a>
                 <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a href="{{ url_for('home') }}" class="nav-link"><i class="fa fa-home"></i><br>Home</a>
+                            <a href="{{ url_for('page_all.home') }}" class="nav-link"><i class="fa fa-home"></i><br>Home</a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ url_for('table') }}" class="nav-link"><i class="fa fa-desktop"></i><br>Dashboard</a>
+                            <a href="{{ url_for('page_all.table') }}" class="nav-link"><i class="fa fa-desktop"></i><br>Dashboard</a>
                         </li>
                         {% if current_user.is_authenticated %}
                         <li class="nav-item">
-                            <a href="{{ url_for('logout') }}" class="nav-link"><i class="fa fa-sign-out-alt"></i><br>Log Out</a>
+                            <a href="{{ url_for('page_all.logout') }}" class="nav-link"><i class="fa fa-sign-out-alt"></i><br>Log Out</a>
                         </li>
                         {% else %}
                         <li class="nav-item">
-                            <a href="{{ url_for('login') }}" class="nav-link"><i class="fa fa-sign-in-alt"></i><br>Log In</a>
+                            <a href="{{ url_for('page_all.login') }}" class="nav-link"><i class="fa fa-sign-in-alt"></i><br>Log In</a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ url_for('register') }}" class="nav-link"><i class="fa fa-signature"></i><br>Sign In</a>
+                            <a href="{{ url_for('page_all.register') }}" class="nav-link"><i class="fa fa-signature"></i><br>Sign In</a>
                         </li>
                         {% endif %}
                     </ul>

@@ -2,7 +2,6 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 
-
 db                          = SQLAlchemy()
 login_manager               = LoginManager()
 # login_manager.init_app()
@@ -24,6 +23,7 @@ def create_app(config_filename=None):
     app = Flask(__name__, static_url_path='/static', instance_relative_config=True)
     app.config.from_pyfile(config_filename)
     initialize_extensions(app)
+    register_blueprints(app)
 
     return app
 
@@ -45,3 +45,15 @@ def initialize_extensions(app):
     def load_user(user_id):
         return User.query.filter(User.id == int(user_id)).first()
 
+
+
+def register_blueprints(app):
+    # Since the application instance is now created, register each Blueprint
+    # with the Flask application instance (app)
+    from app_all import page_all
+    from app_macro import page_macro
+    from app_signals import page_signals
+
+    app.register_blueprint(page_all)
+    app.register_blueprint(page_macro)
+    app.register_blueprint(page_signals)
