@@ -16,23 +16,8 @@ def test_home_page():
     with flask_app.test_client() as test_client:
         response = test_client.get('/')
 
-        print(response)
+        assert response.status_code == 200
 
-
-
-@pytest.fixture
-def client():
-
-    flask_app = create_app('flask.cfg')
-    with flask_app.test_client() as client:
-        yield client
-
-
-class TestHome:
-    def test_this(self, client):
-        res = client.get('/')
-        print("res: ", res)
-        assert res.status_code == 200
 
 
 if __name__ == '__main__':
