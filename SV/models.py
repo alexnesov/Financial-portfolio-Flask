@@ -1,22 +1,22 @@
-from SV import db, login_manager
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from datetime import datetime
+from SV import db
 
-
+"""
 # The user_loader decorator allows flask-login to load the current user
 # and grab their id.
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(user_id)
-
+"""
 
 class User(db.Model, UserMixin):
 
     # Create a table in the db
     __tablename__ = 'users'
 
-    id = db.Column(db.Integer, primary_key=True)
+    id              = db.Column(db.Integer, primary_key=True)
     email           = db.Column(db.String(64), unique=True, index=True)
     username        = db.Column(db.String(64), unique=True, index=True)
     password_hash   = db.Column(db.String(128))

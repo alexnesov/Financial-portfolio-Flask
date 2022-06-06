@@ -3,10 +3,11 @@ from flask import render_template, url_for, flash, redirect, request, Response
 from flask_socketio import SocketIO, send
 from wtforms import TextField, Form
 
+
 from datetime import datetime
 import os
 
-from SV import app, db
+from SV import create_app
 from SV.models import User, TradingIdea
 from SV.users.forms import LoginForm, RegistrationForm, UpdateUserForm
 from SV.users.picture_handler import add_profile_pic
@@ -19,10 +20,16 @@ from app_macro import page_macro
 
 strToday    = str(datetime.today().strftime('%Y-%m-%d'))
 magickey    = os.environ.get('magickey')
-socketio    = SocketIO(app, cors_allowed_origins='*')
+
+app         = create_app('flask.cfg')
+
+
+# Migrate(app, db)
 
 app.register_blueprint(page_signals)
 app.register_blueprint(page_macro)
+
+socketio    = SocketIO(app, cors_allowed_origins='*')
 
 
 class SearchForm(Form):
@@ -43,6 +50,7 @@ def handleMessage(msg):
 
 @app.route('/')
 def home():
+    print("Home called")
     return render_template('home.html')
 
 

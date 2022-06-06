@@ -1,30 +1,47 @@
-import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
 from flask_login import LoginManager
 
-db_user = os.environ.get('aws_db_user')
-db_pass = os.environ.get('aws_db_pass')
-db_endpoint = os.environ.get('aws_db_endpoint')
 
-# Create a login manager object
-login_manager = LoginManager()
+db                          = SQLAlchemy()
+login_manager               = LoginManager()
+# login_manager.init_app()
+login_manager.login_view    = "login"
 
-app = Flask(__name__, static_url_path='/static')
 
-# Often people will also separate these into a separate config.py file
-app.config['SECRET_KEY'] = 'mysecretkey'
-basedir = os.path.abspath(os.path.dirname(__file__))
-""" app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + \
-    os.path.join(basedir, 'data.sqlite') """
 
-app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql+pymysql://{db_user}:{db_pass}@{db_endpoint}:3306/flaskfinance'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+# Using the Application factory pattern to create the Flask application
+# https://flask.palletsprojects.com/en/2.0.x/patterns/appfactories/
+# https://testdriven.io/blog/flask-pytest/
 
-db = SQLAlchemy(app)
-Migrate(app, db)
+######################################
+#### Application Factory Function ####
+######################################
 
-login_manager.init_app(app)
-# Tell users what view to go to when they need to login.
-login_manager.login_view = "login"
+def create_app(config_filename=None):
+
+    print(f"config_filename: {config_filename}")
+    app = Flask(__name__, static_url_path='/static', instance_relative_config=True)
+    app.config.from_pyfile(config_filename)
+    initialize_extensions(app)
+
+    return app
+
+
+##########################
+#### Helper Functions ####
+##########################
+
+def initialize_extensions(app):
+    # Since the application instance is now created, pass it to each Flask
+    # extension instance to bind it to the Flask application instance (app)
+    db.init_app(app)
+    login_manager.init_app(app)
+
+    # Flask-Login configuration
+    from SV.models import User
+
+    @login_manager.user_loader
+    def load_user(user_id):
+        return User.query.filter(User.id == int(user_id)).first()
+

@@ -1,6 +1,6 @@
 
 from flask_login import login_required
-from flask import Blueprint, request, render_template
+from flask import Blueprint, request
 from plotly.subplots import make_subplots
 from signals_lib.detailedGeneration import consolidateSignals
 
