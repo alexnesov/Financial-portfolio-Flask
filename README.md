@@ -33,12 +33,12 @@ At root dir type:<br>
 ```python3 db_create.py```
 
 
-### FP infrastructure
+## New hexagonal infrastructure view
 
 ![alt text](SV/static/hexagon_aws.png)
 
 
-### "Data flow" view
+## Old "Data flow" view
 
 ![alt text](SV/static/signal_flow_na2.png)
 
