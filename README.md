@@ -15,22 +15,8 @@ Please contact alexnesovic@getthesignals.com for further information, for a demo
 Connects to different market data API's. Gathers and synthetizes the data. Will synthesize and display the competitive arenas for every chosen stock.
 The app integrates a user authentication procedure.
 
-<h4> Command to create virtual env (VS code, Ubuntu 20) </h4>
-<p>In <strong>project root dir</strong> open command line:</p>
 
-```
-python3 -m venv .sversus
-source .sversus/bin/activate
-```
-### Testing
-
-At root dir type:<br>
-<code>python -m pytest tests/</code>
-<code>python -m tests.functional.test_routes</code>
-
-### To initiate db (cutover), run:
-
-```python3 db_create.py```
+![alt text](SV/static/dash.png)
 
 
 ## New hexagonal infrastructure view
@@ -42,7 +28,6 @@ At root dir type:<br>
 
 ![alt text](SV/static/signal_flow_na2.png)
 
-![alt text](SV/static/dash.png)
 
 
 
@@ -61,6 +46,24 @@ At root dir type:<br>
 
 
 
+<h4> Command to create virtual env (VS code, Ubuntu 20) </h4>
+<p>In <strong>project root dir</strong> open command line:</p>
+
+
+
+```
+python3 -m venv .sversus
+source .sversus/bin/activate
+```
+### Testing
+
+At root dir type:<br>
+<code>python -m pytest tests/</code>
+<code>python -m tests.functional.test_routes</code>
+
+### To initiate db (cutover), run:
+
+```python3 db_create.py```
 
 
 
