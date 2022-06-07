@@ -57,8 +57,10 @@ source .sversus/bin/activate
 ```
 ### Testing
 
-At root dir type:<br>
-<code>python -m pytest tests/</code>
+To run pytest, an all tests, at root dir type:<br>
+<code>python -m pytest tests/</code> <br>
+
+To run the main() at test_routes, without having an import error:<br>
 <code>python -m tests.functional.test_routes</code>
 
 ### To initiate db (cutover), run:
