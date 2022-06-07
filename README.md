@@ -26,19 +26,24 @@ source .sversus/bin/activate
 
 At root dir type:<br>
 <code>python -m pytest tests/</code>
+<code>python -m tests.functional.test_routes</code>
 
 ### To initiate db (cutover), run:
 
 ```python3 db_create.py```
 
 
-### Infrastructure diagram 
+### FP infrastructure
+
+![alt text](SV/static/hexagon_aws.png)
+
+
+### "Data flow" view
 
 ![alt text](SV/static/signal_flow_na2.png)
 
 ![alt text](SV/static/dash.png)
 
-![alt text](SV/static/Structuring_Code.png)
 
 
 <h4> To do: </h4>
