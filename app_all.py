@@ -1,4 +1,4 @@
-from flask_login import login_user, current_user, logout_user, login_required
+from flask_login import current_user, login_required
 from flask import render_template, url_for, flash, redirect, request, Response
 from wtforms import TextField, Form
 from flask import Blueprint, request
@@ -7,7 +7,7 @@ import os
 
 from SV import db
 from SV.models import User, TradingIdea
-from SV.users.forms import LoginForm, RegistrationForm, UpdateUserForm
+from SV.users.forms import RegistrationForm, UpdateUserForm
 from SV.users.picture_handler import add_profile_pic
 from utils.fetchData import fetchSignals, fetchTechnicals, fetchOwnership, sp500evol
 from utils.graphs import makeOwnershipGraph, lineNBSignals
@@ -72,15 +72,16 @@ def welcome_user():
     return render_template('welcome_user.html')
 
 
-
+"""
 @page_all.route('/logout')
 @login_required
 def logout():
     logout_user()
     flash('You logged out!')
     return redirect(url_for('page_all.home'))
+"""
 
-
+"""
 @page_all.route('/login', methods=['GET', 'POST'])
 def login():
 
@@ -114,7 +115,7 @@ def login():
             print("Next: ", next)
             return redirect(next)
     return render_template('login.html', form=form, log_error = False)
-
+"""
 
 @page_all.route("/account", methods=['GET', 'POST'])
 @login_required
