@@ -129,6 +129,7 @@ colNames = ['ValidTick',
 def STD_FUNC_TABLE_PAGE():
 
     average, items, spSTART, spEND, nSignals, dfSignals = fetchSignals(ALL=True)
+    print("spSTART, spEND: ", spSTART, spEND)
     
     std_sp                                              = sp500evol(spSTART,spEND)
     form                                                = SearchForm(request.form)
@@ -284,6 +285,8 @@ def table():
     Standard view for the "table" page
     """
     standard_args_table_page = STD_FUNC_TABLE_PAGE()
+
+    print("**standard_args_table_page", standard_args_table_page.keys())
 
     return render_template('table.html',
     **standard_args_table_page)
