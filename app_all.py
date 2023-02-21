@@ -33,11 +33,26 @@ class SearchForm(Form):
     validChartSignal    = TextField('validChartSignal', id='validChartSignal')
 
 
+class NConnections():
+
+    def __init__(self, n_con):
+        self.n_con = n_con
+
+    def query(self):
+        self.n_con += 1
+        return self.n_con
+
+obj_n_connections = NConnections(0) 
+
 
 @page_all.route('/')
 def home():
     print("Home called")
-    return render_template('home.html')
+
+    str_obj_n_con = str(obj_n_connections.query())
+    print("str_obj_n_con: ", str_obj_n_con)
+
+    return render_template('home.html', str_obj_n_con = str_obj_n_con)
 
 
 

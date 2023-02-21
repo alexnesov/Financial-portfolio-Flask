@@ -1,3 +1,4 @@
+
 from SV import create_app
 from SV.users.forms import LoginForm
 from flask_login import login_user
@@ -6,8 +7,23 @@ from flask import render_template, redirect, url_for
 from SV.models import User
 from flask_login import logout_user, login_required
 
+import sys
 
 app         = create_app('flask.cfg')
+
+
+class NConnections():
+
+    def __init__(self, n_con):
+        self.n_con = n_con
+
+    def query(self):
+        self.param += 1
+        return self.param
+
+
+obj_n_connections = NConnections(0) 
+
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -53,4 +69,11 @@ def logout():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=True)
+    try:
+        app.run(host='0.0.0.0', debug=True)
+    except OSError as e:
+        if e.errno == 98:
+            print('Port 5000 is already in use. Trying a different port...', file=sys.stderr)
+            app.run(host='0.0.0.0', debug=True, port=5001)
+        else:
+            raise e
