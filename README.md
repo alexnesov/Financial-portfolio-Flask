@@ -19,12 +19,7 @@ The app integrates a user authentication procedure.
 ![alt text](SV/static/dash.png)
 
 
-## New hexagonal infrastructure view
-
-![alt text](SV/static/hexagon_aws.png)
-
-
-## Old "Data flow" view
+## "Data flow" view
 
 ![alt text](SV/static/signal_flow_na2.png)
 
