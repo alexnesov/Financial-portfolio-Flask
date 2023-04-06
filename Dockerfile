@@ -1,13 +1,9 @@
 FROM python:3.8.0-slim
 LABEL maintainer alexnesovic@getthesignals.com
 
-ARG aws_db_endpoint
-ARG aws_db_pass
-ARG aws_db_user
-
-ENV aws_db_endpoint=$aws_db_endpoint
-ENV aws_db_pass=$aws_db_pass
-ENV aws_db_user=$aws_db_user
+ENV aws_db_endpoint=flaskfinance.ccxri6cskobf.eu-central-1.rds.amazonaws.com
+ENV aws_db_pass=awsaws1010
+ENV aws_db_user=ubuntu
 
 RUN apt-get update \
 && apt-get install gcc -y \

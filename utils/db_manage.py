@@ -57,7 +57,13 @@ class DBAccCM:
         Returns a connection object of type mysql.
         """
         try:
-            self.conn = pymysql.connect(host=f'{self.db_endp}',user=f'{self.db_user}',password=f'{self.db_pass}',database=f'{self.dbname}')
+            self.conn = pymysql.connect(host=f'{self.db_endp}',
+                                        user=f'{self.db_user}',
+                                        password=f'{self.db_pass}',
+                                        database=f'{self.dbname}',
+                                        port=3306)
+            
+            print("self.db_endp: ", self.db_endp)
             return self.conn
         except Exception as e:
             raise RuntimeError('Connection could not be established.')
