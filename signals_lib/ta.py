@@ -1,5 +1,12 @@
-def aroon(data, lb=25):
+import pandas as pd
 
+def aroon(data: pd.DataFrame, lb: int = 25) -> tuple:
+    """
+    Calculates the Aroon Up and Aroon Down indicators for a given DataFrame.
+    :param data: DataFrame containing 'High' and 'Low' prices.
+    :param lb: Lookback period for calculating Aroon (default: 25).
+    :return: A tuple of Aroon Up and Aroon Down lists.
+    """
     df = data.copy()
     df['up'] = 100 * df.High.rolling(lb + 1).apply(lambda x: x.argmax()) / lb
     df['dn'] = 100 * df.Low.rolling(lb + 1).apply(lambda x: x.argmin()) / lb
@@ -7,7 +14,14 @@ def aroon(data, lb=25):
     return df['up'].tolist(), df['dn'].tolist() 
 
 
-def rsi(df, timePeriodRSI):
+def rsi(df: pd.DataFrame, timePeriodRSI: int) -> pd.Series:
+    """
+    Calculates the Relative Strength Index (RSI) for a given DataFrame.
+    :param df: DataFrame containing 'Close' prices.
+    :param timePeriodRSI: Time period for calculating RSI.
+    :return: Series containing the RSI values.
+    """
+
     close = df['Close']
     # Get the difference in price from previous step
     delta = close.diff()

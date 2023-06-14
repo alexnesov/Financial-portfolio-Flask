@@ -35,7 +35,7 @@ NASDAQ_LIST     = pd.read_csv('utils/nasdaq_list.csv').iloc[:,0].tolist()
 NYSE_LIST       = pd.read_csv('utils/nyse_list.csv').iloc[:,0].tolist()
 
 
-def SignalDetection(df):
+def SignalDetection(df: pd.DataFrame) -> pd.DataFrame:
     """
     This function downloads prices for desired quotes (those in the parameter)
     and then tries to catch signals for selected timeframe.
@@ -85,9 +85,11 @@ def SignalDetection(df):
 
 
 
-def getData(tick):
+def getData(tick: str) -> pd.DataFrame:
     """
-    Pulling from remote RDS
+    Retrieves data for a specific stock ticker from a remote RDS.
+    :param tick: Stock ticker symbol.
+    :return: A DataFrame containing the stock data.
     """
 
     if tick in NASDAQ_LIST:
@@ -106,8 +108,11 @@ def getData(tick):
 
 
 
-def getsp500(DateSP='2020-01-01'):
+def getsp500(DateSP='2020-01-01') -> pd.DataFrame:
     """
+    Retrieves SP500 data from a specified date onwards and returns it as a DataFrame.
+    :param DateSP: Start date for retrieving SP500 data (default: '2020-01-01').
+    :return: A DataFrame containing SP500 data.
     """
     qu                  = f"SELECT Date, Close FROM marketdata.sp500 where Date>='{DateSP}'"
     sp500df             = db_acc_obj.exc_query(db_name  = 'marketdata', 
@@ -123,7 +128,7 @@ def getsp500(DateSP='2020-01-01'):
 
 
 
-def consolidateSignals(tick):
+def consolidateSignals(tick: str) -> pd.DateOffset:
     """
     """
 
