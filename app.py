@@ -13,11 +13,31 @@ app         = create_app('flask.cfg')
 
 
 class NConnections():
+    """
+    Class representing the number of connections.
 
+    Attributes:
+        n_con (int): The number of connections.
+
+    Methods:
+        query: Increments the number of connections by 1 and returns the updated value.
+    """
     def __init__(self, n_con):
+        """
+        Initialize the NConnections object.
+
+        Args:
+            n_con (int): The initial number of connections.
+        """
         self.n_con = n_con
 
     def query(self):
+        """
+        Increments the number of connections by 1 and returns the updated value.
+
+        Returns:
+            int: The updated number of connections.
+        """
         self.param += 1
         return self.param
 
@@ -28,7 +48,18 @@ obj_n_connections = NConnections(0)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    """
+    Route for the login page.
 
+    If the form is submitted and valid:
+        - Fetch the user from the User Models table based on the email address.
+        - Verify the password for the user.
+        - Log in the user if the password is correct.
+        - Redirect to the next page or the welcome page.
+
+    Returns:
+        A rendered template for the login page.
+    """
     print('Logging in. . .')
     form = LoginForm()
 
@@ -64,6 +95,13 @@ def login():
 @app.route('/logout')
 @login_required
 def logout():
+    """
+    Route for logging out the user.
+
+    Returns:
+        Redirects to the home page.
+    """
+
     logout_user()
     return redirect(url_for('page_all.home'))
 

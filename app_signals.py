@@ -22,6 +22,16 @@ page_signals = Blueprint('page_signals',
 @page_signals.route('/api/fetchSignalChartJsonData')
 @login_required
 def makeLinesSignal():
+    """
+    API endpoint to generate a signal chart JSON data.
+
+    Retrieves the 'tick' parameter from the request arguments, consolidates the signals for the tick,
+    and generates a multi-subplot chart with various signals.
+
+    Returns:
+        str: JSON representation of the generated plotly signal chart.
+    """
+
     # http://127.0.0.1:5000/api/fetchSignalChartJsonData
     tick = request.args["tick"]
     tick = tick.upper()

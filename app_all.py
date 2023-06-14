@@ -4,6 +4,7 @@ from wtforms import TextField, Form
 from flask import Blueprint, request
 from datetime import datetime
 import os
+from typing import List, Tuple, Dict, Any
 
 from SV import db
 from SV.models import User, TradingIdea
@@ -34,8 +35,25 @@ class SearchForm(Form):
 
 
 class NConnections():
+    """
+    Class representing the number of connections.
 
-    def __init__(self, n_con):
+    Attributes:
+        n_con (int): The number of connections.
+
+    Methods:
+        query: Increments the number of connections by 1 and returns the updated value.
+    """
+
+
+    def __init__(self, n_con: int) -> int:
+        """
+        Initialize the NConnections object.
+
+        Args:
+            n_con (int): The initial number of connections.
+        """
+
         self.n_con = n_con
 
     def query(self):
@@ -47,6 +65,13 @@ obj_n_connections = NConnections(0)
 
 @page_all.route('/')
 def home():
+    """
+    Route for the home page.
+
+    Returns:
+        A rendered template for the home page.
+    """
+
     print("Home called")
 
     str_obj_n_con = str(obj_n_connections.query())
@@ -58,6 +83,17 @@ def home():
 
 @page_all.route('/register', methods=['GET', 'POST'])
 def register():
+    """
+    Route for the registration page.
+
+    If the form is submitted and valid:
+        - Create a new user with the provided email, username, and password.
+        - Flash a success message and redirect to the login page.
+
+    Returns:
+        A rendered template for the registration page.
+    """
+
     form            = RegistrationForm()
     formW           = SearchForm(request.form)
     magic           = formW.mW.data
@@ -82,8 +118,14 @@ def register():
 
 
 @page_all.route('/welcome')
-@login_required
 def welcome_user():
+    """
+    Route for the welcome user page.
+
+    Returns:
+        A rendered template for the welcome user page.
+    """
+
     return render_template('welcome_user.html')
 
 
@@ -91,7 +133,17 @@ def welcome_user():
 @page_all.route("/account", methods=['GET', 'POST'])
 @login_required
 def account():
+    """
+    Route for the account page.
 
+    If the form is submitted and valid:
+        - Update the user's account details (username and email).
+        - Flash a success message.
+        - Redirect to the account page.
+
+    Returns:
+        A rendered template for the account page.
+    """
     form = UpdateUserForm()
 
     if form.validate_on_submit():
@@ -117,7 +169,17 @@ def account():
 
 
 @page_all.route("/<username>")
-def user_posts(username):
+def user_posts(username: str):
+    """
+    Route for the user blog posts page.
+
+    Args:
+        username (str): The username of the user.
+
+    Returns:
+        A rendered template for the user blog posts page.
+    """
+
     page        = request.args.get('page',1,type=int)
     user        = User.query.filter_by(username=username).first_or_404()
     blog_posts  = TradingIdea.query.filter_by(author=user).order_by(TradingIdea.date.desc()).paginate(page=page, per_page=5)
@@ -141,8 +203,12 @@ colNames = ['ValidTick',
 
 
 
-def STD_FUNC_TABLE_PAGE():
-
+def STD_FUNC_TABLE_PAGE() -> Dict[str, Any]:
+    """
+    Retrieves signals, performs calculations, and prepares a dictionary of standard arguments
+    used in every route page.
+    :return: A dictionary containing the standard arguments for the table page.
+    """
     average, items, spSTART, spEND, nSignals, dfSignals = fetchSignals(ALL=True)
     print("spSTART, spEND: ", spSTART, spEND)
     
@@ -172,16 +238,15 @@ def STD_FUNC_TABLE_PAGE():
 ####------Standard functions and arguments for the table page------#
 
 
-def tuplesToCSV(Tuples):
+def tuplesToCSV(tuples: List[Tuple]) -> str:
     """
-    To be used by Flask's Reponse class, to return a csv type
-    Transform tuples int a csv style sheet
-    :param 1: tuples
-    :returns: a long string that mimics a CSV
+    Converts a list of tuples into a CSV-style string.
+    :param tuples: A list of tuples.
+    :return: A long string that mimics a CSV.
     """
     reReconstructedCSV = ""
 
-    for line in Tuples:
+    for line in tuples:
         c1 = line[0]
         c2 = line[1].strftime("%Y-%m-%d")
         c3 = line[2].strftime("%Y-%m-%d")
@@ -239,7 +304,6 @@ def ownership():
                     
 
 @page_all.route('/ownership', methods=['POST'])
-@login_required
 def submitOwnership():
     form    = SearchForm(request.form)
     text    = form.stock.data.upper()
@@ -249,33 +313,27 @@ def submitOwnership():
     return render_template('ownership.html', items=items,\
     form=form, stock=text,plot=plot)
 
-
-
     
 
 
 @page_all.route('/investInfra')
-@login_required
 def investInfra():
     return render_template('investInfra.html')
 
 
 
 @page_all.route('/portfolios')
-@login_required
 def portfolios():
     return render_template('portfolios.html')
 
 
 @page_all.route('/crypto')
-@login_required
 def crypto():
     return render_template('crypto.html')
 
 
 
 @page_all.route('/ideas')
-@login_required
 def ideas():
     return render_template('ideas.html')
 
@@ -308,7 +366,6 @@ def table():
 
 
 @page_all.route("/getCSV", methods=['GET'])
-@login_required
 def getCSV():
     items = fetchSignals()
     reReconstructedCSV = tuplesToCSV(Tuples=items)

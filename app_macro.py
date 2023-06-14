@@ -17,6 +17,13 @@ db_acc_obj = std_db_acc_obj()
 @page_macro.route('/macroView')
 @login_required
 def macroView():
+    """
+    Route for the macroView page.
+
+    Returns:
+        A rendered template for the macroView page.
+    """
+
     return render_template('macroView.html')
 
 
@@ -24,7 +31,15 @@ def macroView():
 @page_macro.route('/api/fetchSectorEvols')
 @login_required
 def get_sectors_evols():
+    """
+    API endpoint to fetch sector evolutions.
 
+    Retrieves the interval parameter from the request arguments, queries the sectorEvols table,
+    and generates a bar graph of sector evolutions for the specified interval.
+
+    Returns:
+        str: JSON representation of the generated plotly bar graph.
+    """
     interval = request.args["interval"]
 
     print('User selected interval: ', interval)
