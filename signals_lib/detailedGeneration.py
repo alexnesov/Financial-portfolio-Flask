@@ -130,6 +130,10 @@ def getsp500(DateSP='2020-01-01') -> pd.DataFrame:
 
 def consolidateSignals(tick: str) -> pd.DateOffset:
     """
+    Consolidates signals dataframe for a given stock ticker by fetching SP500 data, calculating percentage evolution,
+    and merging it with the stock data.
+    :param tick: Stock ticker symbol.
+    :return: DataFrame containing consolidated signals.
     """
 
     #### SP500 data fetch + % evol 1D calculation"
