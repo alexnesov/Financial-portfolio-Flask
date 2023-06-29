@@ -368,7 +368,9 @@ def table():
 @page_all.route("/getCSV", methods=['GET'])
 def getCSV():
     items = fetchSignals()
-    reReconstructedCSV = tuplesToCSV(Tuples=items)
+    print("items: ")
+    print(items)
+    reReconstructedCSV = tuplesToCSV(tuples=items)
     return Response(
         reReconstructedCSV,
         mimetype="text/csv",
