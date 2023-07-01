@@ -37,12 +37,16 @@ def makeLinesSignal():
     tick = tick.upper()
 
     if tick == '':
-        tick ='AXR'
+        tick ='MSFT'
 
-    print(f"tick recieved: {tick}")
+    print(f"==> :INFO: tick recieved: {tick}")
     # You can have tick validation before moving ahead, if it's invalid tick then return error on UI
 
     df_signals = consolidateSignals(tick)
+
+
+    print("\n\n df_signals: \n ")
+    print(df_signals)
 
     fig = make_subplots(rows                = 7, 
                         cols                = 1,

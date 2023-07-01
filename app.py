@@ -108,7 +108,7 @@ def logout():
 
 if __name__ == '__main__':
     try:
-        app.run(host='0.0.0.0', debug=True)
+        app.run(host='0.0.0.0', debug=False)
     except OSError as e:
         if e.errno == 98:
             print('Port 5000 is already in use. Trying a different port...', file=sys.stderr)

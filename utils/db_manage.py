@@ -101,10 +101,13 @@ class DBManager:
         try:
             ret = None
             with self.connection(db_name) as conn:
-
                 if retres is QuRetType.ALLASPD or \
                     retres is QuRetType.ALLASCSV:
+
+                    print(f"==> :INFO: Querying db_name: {db_name}. \n\
+                          Query: {query}")
                     ret = pd.read_sql(query, conn)
+                    print(f"==> :INFO: ret in exc_query(): {ret}")
                 else:
                     c = conn.cursor()
                     c.execute(query)

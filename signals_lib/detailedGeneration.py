@@ -98,7 +98,7 @@ def getData(tick: str) -> pd.DataFrame:
         stockExchange = "NYSE"
 
 
-    print(f'Getting tick data from RDS (stock exchange: {stockExchange}). . .')
+    print(f'==> :INFO: Getting tick data from RDS (stock exchange: {stockExchange}). . .')
     qu = f"SELECT * FROM {stockExchange}_20 WHERE Symbol = '{tick}'"
     df = db_acc_obj.exc_query(db_name   = 'marketdata', 
                               query     = qu,\
@@ -137,12 +137,15 @@ def consolidateSignals(tick: str) -> pd.DataFrame:
     """
 
     #### SP500 data fetch + % evol 1D calculation"
-    print('Getting SP500 data from RDS to build the benchmark comparison. . .')
+    print('==> :INFO: Getting SP500 data from RDS to build the benchmark comparison. . .')
     dfsp500                             = getsp500() # YYYY-MM-DD
     dfsp500['returnSP500_1D']           = dfsp500.Close_sp.pct_change()[1:]
     #### SP500 data fetch + % evol 1D calculation"
 
     initialDF                           = getData(tick)
+
+    print('==> :INFO: initialDF: ')
+    print(initialDF)
 
     dfStock                             = SignalDetection(initialDF)
     dfStock[f'return_1D']               = dfStock.Close.pct_change()[1:] # YYYY-MM-DD
