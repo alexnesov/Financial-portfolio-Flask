@@ -107,7 +107,7 @@ def register():
             db.session.add(user)
             db.session.commit()
             flash('Thanks for registering! Now you can login!')
-            return redirect(url_for('page_all.login'))
+            return render_template('login.html', form=form)
         else:
             return render_template('register.html', form=form, \
             formW=formW,magics=False)
@@ -321,16 +321,9 @@ def investInfra():
     return render_template('investInfra.html')
 
 
-
 @page_all.route('/portfolios')
 def portfolios():
     return render_template('portfolios.html')
-
-
-@page_all.route('/crypto')
-def crypto():
-    return render_template('crypto.html')
-
 
 
 @page_all.route('/ideas')
@@ -342,13 +335,6 @@ def ideas():
 @login_required
 def pipelines():
     return render_template('pipelines.html')
-
-
-@page_all.route('/brownian')
-@login_required
-def brownian():
-    return render_template('brownian.html')
-
 
 
 @page_all.route('/table')
