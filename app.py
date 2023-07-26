@@ -6,7 +6,6 @@ from flask import request
 from flask import render_template, redirect, url_for
 from SV.models import User
 from flask_login import logout_user, login_required
-
 import sys
 
 app         = create_app('flask.cfg')

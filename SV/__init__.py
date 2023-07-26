@@ -51,9 +51,7 @@ def register_blueprints(app):
     # Since the application instance is now created, register each Blueprint
     # with the Flask application instance (app)
     from app_all import page_all
-    from app_macro import page_macro
     from app_signals import page_signals
 
     app.register_blueprint(page_all)
-    app.register_blueprint(page_macro)
     app.register_blueprint(page_signals)

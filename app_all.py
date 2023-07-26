@@ -274,35 +274,6 @@ def technicals():
     
 
 
-@page_all.route('/technicals', methods=['POST'])
-@login_required
-def submitTechnicals():
-    form    = SearchForm(request.form)
-    text    = form.stock.data.upper()
-    items   = fetchTechnicals(text)
-
-    return render_template('technicals.html', 
-    items   = items,
-    form    = form, 
-    stock   = text)
-
-
-
-@page_all.route('/ownership')
-@login_required
-def ownership():
-    tick    = 'PLUG'
-    form    = SearchForm(request.form)
-    text    = form.stock.data.upper()
-    items   = fetchOwnership(tick)
-    plot    = makeOwnershipGraph(items, tick)
-
-    return render_template('ownership.html',
-                            items   = items,
-                            form    = form,
-                            plot    = plot)
-                    
-
 @page_all.route('/ownership', methods=['POST'])
 def submitOwnership():
     form    = SearchForm(request.form)
