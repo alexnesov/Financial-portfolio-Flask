@@ -76,7 +76,6 @@ class PriceProvider:
             return "NA"
 
 
-
     def get_price(self, ticker: str, date: str):
         """
         "Date" format: YYYY-MM-DD
@@ -88,7 +87,7 @@ class PriceProvider:
         res = db_acc_obj.exc_query(db_name='marketdata', query=qu, \
         retres=QuRetType.ALLASPD)
 
-        print(res)
+        print(res['Close'])
 
 
 def get_price_at_Dx_plus(row: pd.Series, d:int):
