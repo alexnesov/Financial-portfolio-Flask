@@ -15,7 +15,6 @@ class sp500evol:
     :param spEND: most recent date (STRING, format: '%Y-%m-%d')
 
     """
-
     
     def __init__(self, spSTART, spEND):
         self.spSTART = spSTART
