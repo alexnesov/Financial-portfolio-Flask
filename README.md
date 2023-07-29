@@ -26,9 +26,7 @@ The app integrates a user authentication procedure.
 
 <h4> To do: </h4>
 
-
-<h4> Command to create virtual env (VS code, Ubuntu 20) </h4>
-<p>In <strong>project root dir</strong> open command line:</p>
+NA <br>
 
 <h2> Docker commands</h2> </br>
 In the app folder, run the following command: </br>
