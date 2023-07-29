@@ -74,10 +74,8 @@ def home():
 
     print("Home called")
 
-    str_obj_n_con = str(obj_n_connections.query())
-    print("str_obj_n_con: ", str_obj_n_con)
 
-    return render_template('home.html', str_obj_n_con = str_obj_n_con)
+    return render_template('home.html')
 
 
 
@@ -296,10 +294,6 @@ def investInfra():
 def portfolios():
     return render_template('portfolios.html')
 
-
-@page_all.route('/ideas')
-def ideas():
-    return render_template('ideas.html')
 
 
 @page_all.route('/pipelines')
