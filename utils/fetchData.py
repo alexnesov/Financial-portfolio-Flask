@@ -102,15 +102,6 @@ def fetchSignals(**kwargs):
             averageOfReturns = 0
         return round(averageOfReturns,2), items, spSTART, spEND, nSignals, dfitems
 
-
-        # qu20 = "select * from marketdata"
-        # After 20 days
-        #" test = db_acc_obj.exc_query(db_name='marketdata', query=qu, \
-        # retres=QuRetType.ALLASPD)
-
-        D20 = []
-
-
     else:
         return items
 
