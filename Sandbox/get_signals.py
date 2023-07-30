@@ -4,8 +4,8 @@
 from utils.fetchData import fetchSignals
 from datetime import datetime, timedelta
 import pandas as pd
-from utils.db_manage import std_db_acc_obj, QuRetType
-db_acc_obj = std_db_acc_obj() 
+from Sandbox.provider import Prices
+
 
 
 average, items, spSTART, spEND, nSignals, dfSignals = fetchSignals(ALL=True)
@@ -56,39 +56,6 @@ def filter_rows_by_delta(dataframe: pd.DataFrame, days_threshold: int = 6) -> pd
     return filtered_df
 
 
-class PriceProvider:
-
-    def __init__(self) -> None:
-        self.NASDAQ_LIST     = pd.read_csv('utils/nasdaq_list.csv').iloc[:,0].tolist()
-        self.NYSE_LIST       = pd.read_csv('utils/nyse_list.csv').iloc[:,0].tolist()
-
-
-    def detect_stock_exchange(self, ticker: str):
-        """
-        """
-        
-        if ticker in self.NASDAQ_LIST:
-            return "NASDAQ"
-        elif ticker in self.NYSE_LIST:
-            return "NYSE"
-        else:
-            print("Ticker not recognized. . . ")
-            return "NA"
-
-
-    def get_price(self, ticker: str, date: str):
-        """
-        "Date" format: YYYY-MM-DD
-        """
-        print(f"Getting price for {ticker}. . .")
-        SE = self.detect_stock_exchange(ticker)
-        print(f'Ticker is in: {SE}. . .')
-        qu = f'SELECT * FROM marketdata.{SE}_20 Where Symbol = "{ticker}" and Date = "{date}"'
-        res = db_acc_obj.exc_query(db_name='marketdata', query=qu, \
-        retres=QuRetType.ALLASPD)
-
-        print(res['Close'])
-
 
 
 
@@ -99,11 +66,18 @@ def get_price_at_Dx_plus(row: pd.Series, d:int):
     pass
 
 
+"PriceEvolution2"
+"PriceEvolution3"
+"PriceEvolution4"
 
+# Create col D+1, D+2, D+3
 
 if __name__ == '__main__':
     df = filter_rows_by_delta(dfSignals)
+    print(df.head(50))
 
-    provider = PriceProvider()
-    provider.get_price("MSFT", "2023-04-28")
-    print(df)
+    price_eprovider = Prices()
+    price_eprovider.get_price("MSFT", "2023-04-28")
+
+# python -m Sandbox.get_signals
+
