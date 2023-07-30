@@ -90,6 +90,8 @@ class PriceProvider:
         print(res['Close'])
 
 
+
+
 def get_price_at_Dx_plus(row: pd.Series, d:int):
     """
     For a given row and column, gets the price at d + something

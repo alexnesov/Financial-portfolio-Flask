@@ -1,5 +1,5 @@
 import pandas as pd
-from datetime import datetime, timedelta 
+from datetime import datetime 
 
 from utils.db_manage import QuRetType, std_db_acc_obj
 db_acc_obj = std_db_acc_obj() 

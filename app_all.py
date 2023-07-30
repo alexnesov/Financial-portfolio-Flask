@@ -7,7 +7,7 @@ import os
 from typing import List, Tuple, Dict, Any
 
 from SV import db
-from SV.models import User, TradingIdea
+from SV.models import User
 from SV.users.forms import RegistrationForm, UpdateUserForm
 from SV.users.picture_handler import add_profile_pic
 from utils.fetchData import fetchSignals, fetchTechnicals, fetchOwnership, sp500evol
@@ -128,6 +128,7 @@ def welcome_user():
 
 
 
+
 @page_all.route("/account", methods=['GET', 'POST'])
 @login_required
 def account():
@@ -154,7 +155,6 @@ def account():
         current_user.username = form.username.data
         current_user.email = form.email.data
         db.session.commit()
-        flash('User Account Updated')
         return redirect(url_for('page_all.account'))
 
     elif request.method == 'GET':
@@ -165,24 +165,6 @@ def account():
     
     return render_template('account.html', profile_image=profile_image, form=form)
 
-
-@page_all.route("/<username>")
-def user_posts(username: str):
-    """
-    Route for the user blog posts page.
-
-    Args:
-        username (str): The username of the user.
-
-    Returns:
-        A rendered template for the user blog posts page.
-    """
-
-    page        = request.args.get('page',1,type=int)
-    user        = User.query.filter_by(username=username).first_or_404()
-    blog_posts  = TradingIdea.query.filter_by(author=user).order_by(TradingIdea.date.desc()).paginate(page=page, per_page=5)
-    
-    return render_template('user_blog_posts.html', blog_posts=blog_posts, user=user)
 
 
 ####------Standard functions and arguments for the table page------#
