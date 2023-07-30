@@ -1,11 +1,7 @@
 import pandas as pd
 from utils.db_manage import std_db_acc_obj, QuRetType
-
-import warnings
-
-# Filter out the specific UserWarning related to pandas and SQLAlchemy
-warnings.filterwarnings("ignore", category=UserWarning, module="pandas")
-
+import numpy as np
+import math
 
 db_acc_obj = std_db_acc_obj() 
 
@@ -42,24 +38,56 @@ class Prices:
 
         qu = f'SELECT * FROM marketdata.{SE}_20 Where Symbol = "{ticker}" and Date = "{date}"'
 
-        res = db_acc_obj.exc_query(db_name='marketdata', query=qu, \
-        retres=QuRetType.ALLASPD)
+        res = db_acc_obj.exc_query(db_name='marketdata', 
+                                   query=qu, 
+                                   retres=QuRetType.ALLASPD)
 
         print(res['Close'])
 
+    def quer_d_plus_1(self):
 
+        one_day = pd.Timedelta(days=1)
+        self.date = self.date + one_day
+
+        qu = f'SELECT * FROM marketdata.{self.SE}_20 Where Symbol = "{self.ticker}" and Date = "{self.date}"'
+        res = db_acc_obj.exc_query(db_name='marketdata', 
+                                    query=qu,
+                                    retres=QuRetType.ALLASPD)
+        return res['Close']
+        
+               
     def get_price_from_df(self, row: pd.Series):
         """
         """
-        ticker = row["ValidTick"]
-        date = row["Signaldate_plus_1"]
+        print(row.to_dict())
+        if (row['Sector'] == None):
+            return np.nan
+        else:
+            self.ticker = row["ValidTick"]
+            self.date = row["Signaldate_plus_1"]
 
-        SE = self.detect_stock_exchange(ticker)
+            self.SE = self.detect_stock_exchange(self.ticker)
 
-        qu = f'SELECT * FROM marketdata.{SE}_20 Where Symbol = "{ticker}" and Date = "{date}"'
+            qu = f'SELECT * FROM marketdata.{self.SE}_20 Where Symbol = "{self.ticker}" and Date = "{self.date}"'
 
-        res = db_acc_obj.exc_query(db_name='marketdata', query=qu, \
-        retres=QuRetType.ALLASPD)
+            res = db_acc_obj.exc_query(db_name='marketdata', 
+                                       query=qu,
+                                       retres=QuRetType.ALLASPD)
 
-        return res['Close']
+            if res['Close'].empty:
+                print(f"No Closing price for {self.ticker} for the date {self.date}")
+                new_res = self.quer_d_plus_1()
+                if new_res.empty:
+                    new_res = self.quer_d_plus_1()
+                    if new_res.empty:
+                        new_res = self.quer_d_plus_1()
+                        return new_res
+                    else:
+                        return new_res
+                else:
+                    return new_res
+            else:
+                return res['Close']
+
+            
 

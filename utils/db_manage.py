@@ -66,7 +66,6 @@ class DBAccCM:
                                         database=f'{self.dbname}',
                                         port=3306)
             
-            print("self.db_endp: ", self.db_endp)
             return self.conn
         except Exception as e:
             raise RuntimeError('Connection could not be established.')

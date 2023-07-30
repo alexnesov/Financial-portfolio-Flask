@@ -97,36 +97,17 @@ def add_days_to_df(dataframe: pd.DataFrame, date_col_name: str, delta_days: int)
 
 
 if __name__ == '__main__':
-    print(dfSignals)
-    df = filter_rows_by_delta(dfSignals)
-    df_50 = df.head(1)
-    
+    df = filter_rows_by_delta(dfSignals).head(50).copy()
+    df = filter_rows_by_delta(dfSignals).iloc[40:43].copy()
 
-
-    data = {
-        "ValidTick": ["ENTX"],
-        "SignalDate": ["2023-07-24"],
-        "ScanDate": ["2023-07-25"],
-        "NSanDaysInterval": [2],
-        "PriceAtSignal": [0.83],
-        "LastClosingPrice": [0.81],
-        "PriceEvolution": [-2.41],
-        "Company": ["Entera Bio Ltd."],
-        "Sector": ["Healthcare"],
-        "Industry": ["Biotechnology"]
-    }
-
-    df = pd.DataFrame(data)
     df['SignalDate'] = pd.to_datetime(df['SignalDate'])
     df['ScanDate'] = pd.to_datetime(df['ScanDate'])
 
-
-
-    print(df_50)
-    price_eprovider = Prices()
+    print(df)
+    price_provider = Prices()
 
     df = add_days_to_df(df, "SignalDate", 1)
-    df["Price_day_1"] = df.apply(price_eprovider.get_price_from_df, axis=1)
+    df["Price_day_1"] = df.apply(price_provider.get_price_from_df, axis=1)
 
 
     print(df)
