@@ -7,7 +7,6 @@ import pandas as pd
 from Sandbox.provider import Prices
 
 
-
 average, items, spSTART, spEND, nSignals, dfSignals = fetchSignals(ALL=True)
 today = datetime.now()
 
@@ -65,19 +64,72 @@ def get_price_at_Dx_plus(row: pd.Series, d:int):
     """
     pass
 
+def add_days_to_df(dataframe: pd.DataFrame, date_col_name: str, delta_days: int):
+    """
+    Adds the specified number of delta days to the 'Signaldate' column of the input dataframe.
 
-"PriceEvolution2"
+    Parameters:
+        dataframe (pandas.DataFrame): The input dataframe containing the 'Signaldate' column.
+        delta_days (int): The number of days to add to each 'Signaldate' value.
+
+    Returns:
+        pandas.DataFrame: A new dataframe with the additional column containing Signaldate + delta_days.
+    """
+    # Convert the "Signaldate" column to datetime type
+    # df["Signaldate"] = pd.to_datetime(df["Signaldate"])
+
+    # Add the specified number of days to the "Signaldate" column and store it in a new column
+    df[f"Signaldate_plus_{str(delta_days)}"] = df[date_col_name] + pd.Timedelta(days=delta_days)
+
+    return df
+
+"""
+"Date_2" + 2  Days After ScanDate 
+"Price_2" + 2  
+"PriceEvolution_2"
+"Date_3"
 "PriceEvolution3"
+"Date_4"
 "PriceEvolution4"
-
+"""
 # Create col D+1, D+2, D+3
 
-if __name__ == '__main__':
-    df = filter_rows_by_delta(dfSignals)
-    print(df.head(50))
 
+
+if __name__ == '__main__':
+    print(dfSignals)
+    df = filter_rows_by_delta(dfSignals)
+    df_50 = df.head(1)
+    
+
+
+    data = {
+        "ValidTick": ["ENTX"],
+        "SignalDate": ["2023-07-24"],
+        "ScanDate": ["2023-07-25"],
+        "NSanDaysInterval": [2],
+        "PriceAtSignal": [0.83],
+        "LastClosingPrice": [0.81],
+        "PriceEvolution": [-2.41],
+        "Company": ["Entera Bio Ltd."],
+        "Sector": ["Healthcare"],
+        "Industry": ["Biotechnology"]
+    }
+
+    df = pd.DataFrame(data)
+    df['SignalDate'] = pd.to_datetime(df['SignalDate'])
+    df['ScanDate'] = pd.to_datetime(df['ScanDate'])
+
+
+
+    print(df_50)
     price_eprovider = Prices()
-    price_eprovider.get_price("MSFT", "2023-04-28")
+
+    df = add_days_to_df(df, "SignalDate", 1)
+    df["Price_day_1"] = df.apply(price_eprovider.get_price_from_df, axis=1)
+
+
+    print(df)
 
 # python -m Sandbox.get_signals
 

@@ -8,6 +8,11 @@ import sqlalchemy as sa
 import functools
 import traceback
 
+import warnings
+
+# Filter out the specific UserWarning related to pandas and SQLAlchemy
+warnings.filterwarnings("ignore", category=UserWarning, module="pandas")
+
 
 class QuRetType(Enum):
     """
@@ -35,8 +40,6 @@ class QuRetType(Enum):
     ALLASCSV = auto()   #all data written to some csv file
     ALLASXLS = auto()   #all data written to some xls file    
     MANY = auto()   #all data written to some xls file    
-
-
 
 
 
@@ -75,7 +78,9 @@ class DBAccCM:
 class DBManager:
 
     def __init__(self):
-        pass
+        self.db_pass = os.environ.get('aws_db_pass')
+        self.db_user = os.environ.get('aws_db_user')
+        self.db_endp = os.environ.get('aws_db_endpoint')
 
     def connection(self, dbname):
         """
@@ -101,13 +106,9 @@ class DBManager:
         try:
             ret = None
             with self.connection(db_name) as conn:
-                if retres is QuRetType.ALLASPD or \
-                    retres is QuRetType.ALLASCSV:
-
-                    print(f"==> :INFO: Querying db_name: {db_name}. \n\
-                          Query: {query}")
-                    ret = pd.read_sql(query, conn)
-                    print(f"==> :INFO: ret in exc_query(): {ret}")
+                if retres is QuRetType.ALLASPD or retres is QuRetType.ALLASCSV:
+                    engine = create_engine(f'mysql+pymysql://{self.db_user}:{self.db_pass}@{self.db_endp}/{db_name}')
+                    ret = pd.read_sql(query, engine)
                 else:
                     c = conn.cursor()
                     c.execute(query)
@@ -122,9 +123,26 @@ class DBManager:
                         pass
 
         except Exception as e:
-            print("An error occured during the query execution.")
+            print("An error occurred during the query execution.")
             print(f"{traceback.format_exc()}")
         return ret
+
+
+            
+
+@functools.lru_cache(maxsize=1)
+def std_db_acc_obj():         
+    """                                                             
+    Creates the standard data base access object (see: :py:class:`DBManager`)
+    """
+    db_acc_obj = DBManager()     
+    return db_acc_obj      
+
+
+
+
+
+
 
 
 def dfToRDS(df, table, db_name):
@@ -153,26 +171,3 @@ def dfToRDS(df, table, db_name):
         raise RuntimeError('Connection could not be established.')
     finally:
         engine.dispose()
-
-            
-
-@functools.lru_cache(maxsize=1)
-def std_db_acc_obj():         
-    """                                                             
-    Creates the standard data base access object (see: :py:class:`DBManager`)
-    """
-    db_acc_obj = DBManager()     
-    return db_acc_obj      
-
-"""
-# TESTING
-quer = "show tables;"
-db_acc_obj = std_db_acc_obj()
-df = db_acc_obj.exc_query('flaskfinance', query=quer, retres=QuRetType.ALL)
-"""
-
-"""
-Important: 
-sudo apt-get install python3-dev default-libmysqlclient-dev build-essential
-pip install mysqlclient
-"""
