@@ -1,7 +1,6 @@
 import pandas as pd
 from utils.db_manage import std_db_acc_obj, QuRetType
 import numpy as np
-import math
 
 db_acc_obj = std_db_acc_obj() 
 
@@ -75,13 +74,14 @@ class Prices:
                                        retres=QuRetType.ALLASPD)
 
             if res['Close'].empty:
-                print(f"No Closing price for {self.ticker} for the date {self.date}")
+                print(f"No Closing price for {self.ticker} for the date {self.date}. Certainly due to vacation day, advancing in time. . .")
+                # If res empty means if there is vacation, we add one business day to get to the first business day. We consider that there
+                # can't be more then 4 consecutive days of vacation days on the trading floor
                 new_res = self.quer_d_plus_1()
                 if new_res.empty:
                     new_res = self.quer_d_plus_1()
                     if new_res.empty:
-                        new_res = self.quer_d_plus_1()
-                        return new_res
+                        return self.quer_d_plus_1()
                     else:
                         return new_res
                 else:

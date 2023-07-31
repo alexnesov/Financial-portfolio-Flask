@@ -98,7 +98,6 @@ def add_days_to_df(dataframe: pd.DataFrame, date_col_name: str, delta_days: int)
 
 if __name__ == '__main__':
     df = filter_rows_by_delta(dfSignals).head(50).copy()
-    df = filter_rows_by_delta(dfSignals).iloc[40:43].copy()
 
     df['SignalDate'] = pd.to_datetime(df['SignalDate'])
     df['ScanDate'] = pd.to_datetime(df['ScanDate'])

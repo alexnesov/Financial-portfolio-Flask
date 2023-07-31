@@ -5,3 +5,7 @@ phases:
     commands:
       - echo Build started on `date`
       - docker build -t fp_backend .
+
+artifacts:
+  files:
+    - '**/*'
