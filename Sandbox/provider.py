@@ -91,3 +91,6 @@ class Prices:
 
             
 
+if __name__ == '__main__':
+    provide = Prices()
+    provide.get_price("MSFT","2023-06-02")

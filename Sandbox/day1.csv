@@ -1,0 +1,51 @@
+,ValidTick,SignalDate,ScanDate,NSanDaysInterval,PriceAtSignal,LastClosingPrice,PriceEvolution,Company,Sector,Industry,Signaldate_plus_1,Price_day_1
+29,HROW,2023-07-25,2023-07-26,2,21.23,21.45,1.04,"Harrow Health, Inc.",Healthcare,Drug Manufacturers - Specialty & Generic,2023-07-26,21.29
+30,VOD,2023-07-25,2023-07-26,2,9.79,9.75,-0.41,Vodafone Group Plc,Communication Services,Telecom Services,2023-07-26,10.03
+31,KOSS,2023-07-25,2023-07-26,2,4.00,3.99,-0.25,Koss Corporation,Technology,Consumer Electronics,2023-07-26,4.45
+32,SHV,2023-07-25,2023-07-26,2,110.33,110.42,0.08,iShares Short Treasury Bond ETF,Financial,Exchange Traded Fund,2023-07-26,110.35
+33,NRBO,2023-07-25,2023-07-26,2,0.56,0.51,-8.93,"NeuroBo Pharmaceuticals, Inc.",Healthcare,Biotechnology,2023-07-26,0.5497
+34,INTG,2023-07-25,2023-07-26,2,37.38,36.00,-3.69,The InterGroup Corporation,Consumer Cyclical,Lodging,2023-07-26,36.64
+35,AFGC,2023-07-25,2023-07-26,2,21.44,20.94,-2.33,,,,2023-07-26,
+36,MMLP,2023-07-25,2023-07-26,2,2.49,2.39,-4.02,Martin Midstream Partners L.P.,Energy,Oil & Gas Midstream,2023-07-26,2.4
+37,SBSI,2023-07-25,2023-07-26,2,30.00,33.21,10.70,"Southside Bancshares, Inc.",Financial,Banks - Regional,2023-07-26,33.48
+38,WVVI,2023-07-25,2023-07-26,2,6.15,6.15,0.00,"Willamette Valley Vineyards, Inc.",Consumer Defensive,Beverages - Wineries & Distilleries,2023-07-26,6.321
+39,HRMY,2023-07-25,2023-07-26,2,36.45,35.21,-3.40,"Harmony Biosciences Holdings, Inc.",Healthcare,Biotechnology,2023-07-26,35.5
+40,VNOM,2023-07-25,2023-07-26,2,26.91,26.63,-1.04,Viper Energy Partners LP,Energy,Oil & Gas Midstream,2023-07-26,26.43
+41,IPAR,2023-07-25,2023-07-26,2,143.99,150.32,4.40,"Inter Parfums, Inc.",Consumer Defensive,Household & Personal Products,2023-07-26,150.7
+42,FAMI,2023-07-25,2023-07-26,2,0.51,0.48,-5.88,"Farmmi, Inc.",Consumer Defensive,Packaged Foods,2023-07-26,0.476
+43,BME,2023-07-25,2023-07-26,2,40.33,40.16,-0.42,BlackRock Health Sciences Trust,Financial,Closed-End Fund - Equity,2023-07-26,40.31
+44,AMC,2023-07-25,2023-07-26,2,5.12,4.64,-9.38,"AMC Entertainment Holdings, Inc.",Communication Services,Entertainment,2023-07-26,5.07
+45,ENTX,2023-07-24,2023-07-25,2,0.83,0.81,-2.41,Entera Bio Ltd.,Healthcare,Biotechnology,2023-07-25,0.81
+46,CAC,2023-07-24,2023-07-25,2,34.07,34.89,2.41,Camden National Corporation,Financial,Banks - Regional,2023-07-25,34.01
+47,VTRU,2023-07-24,2023-07-25,2,16.50,16.50,0.00,Vitru Limited,Consumer Defensive,Education & Training Services,2023-07-25,17.0
+48,SCHL,2023-07-24,2023-07-25,2,43.43,43.45,0.05,Scholastic Corporation,Communication Services,Publishing,2023-07-25,42.73
+49,GIGM,2023-07-24,2023-07-25,2,1.46,1.51,3.42,GigaMedia Limited,Communication Services,Electronic Gaming & Multimedia,2023-07-25,1.4901
+50,NXP,2023-07-24,2023-07-25,2,14.52,14.58,0.41,Nuveen Select Tax-Free Income Portfolio,Financial,Closed-End Fund - Debt,2023-07-25,14.51
+51,AFGE,2023-07-24,2023-07-25,2,18.35,18.15,-1.09,,,,2023-07-25,
+52,QDEL,2023-07-24,2023-07-25,2,88.30,87.12,-1.34,Quidel Corporation,Healthcare,Diagnostics & Research,2023-07-25,88.63
+53,NM,2023-07-24,2023-07-25,2,1.74,1.89,8.62,Navios Maritime Holdings Inc.,Industrials,Marine Shipping,2023-07-25,1.7601
+54,USEG,2023-07-24,2023-07-25,2,1.64,1.52,-7.32,U.S. Energy Corp.,Energy,Oil & Gas E&P,2023-07-25,1.5
+55,FTXH,2023-07-24,2023-07-25,2,26.68,26.65,-0.11,First Trust Nasdaq Pharmaceuticals ETF,Financial,Exchange Traded Fund,2023-07-25,26.6284
+56,RGEN,2023-07-24,2023-07-25,2,176.51,174.22,-1.30,Repligen Corporation,Healthcare,Medical Instruments & Supplies,2023-07-25,174.49
+57,INCY,2023-07-24,2023-07-25,2,63.46,63.09,-0.58,Incyte Corporation,Healthcare,Biotechnology,2023-07-25,63.79
+58,XEL,2023-07-24,2023-07-25,2,65.08,62.89,-3.37,Xcel Energy Inc.,Utilities,Utilities - Regulated Electric,2023-07-25,64.96
+59,SNDX,2023-07-24,2023-07-25,2,21.77,21.23,-2.48,"Syndax Pharmaceuticals, Inc.",Healthcare,Biotechnology,2023-07-25,21.66
+60,ABBV,2023-07-24,2023-07-25,2,143.18,150.85,5.36,AbbVie Inc.,Healthcare,Drug Manufacturers - General,2023-07-25,141.63
+61,BRID,2023-07-24,2023-07-25,2,12.12,11.51,-5.03,Bridgford Foods Corporation,Consumer Defensive,Packaged Foods,2023-07-25,11.75
+62,ENR,2023-07-24,2023-07-25,2,34.24,36.01,5.17,"Energizer Holdings, Inc.",Industrials,Electrical Equipment & Parts,2023-07-25,35.04
+63,AXNX,2023-07-21,2023-07-22,2,53.94,60.85,12.81,"Axonics Modulation Technologies, Inc.",Healthcare,Medical Devices,2023-07-22,54.16
+64,BSCQ,2023-07-21,2023-07-22,2,19.02,18.97,-0.26,Invesco BulletShares 2026 Corporate Bond ETF,Financial,Exchange Traded Fund,2023-07-22,18.93
+65,ETR,2023-07-21,2023-07-22,2,103.99,103.27,-0.69,Entergy Corporation,Utilities,Utilities - Diversified,2023-07-22,104.46
+66,CNI,2023-07-21,2023-07-22,2,118.55,120.80,1.90,Canadian National Railway Company,Industrials,Railroads,2023-07-22,118.95
+67,UTZ,2023-07-21,2023-07-22,2,17.02,16.75,-1.59,"Utz Brands, Inc.",Consumer Defensive,Packaged Foods,2023-07-22,17.07
+68,USIG,2023-07-21,2023-07-22,2,50.10,49.95,-0.30,iShares Broad USD Investment Grade Corporate Bond ETF,Financial,Exchange Traded Fund,2023-07-22,50.04
+69,TW,2023-07-21,2023-07-22,2,74.77,82.67,10.57,Tradeweb Markets Inc.,Financial,Capital Markets,2023-07-22,74.87
+70,WIA,2023-07-21,2023-07-22,2,8.42,8.46,0.48,Western Asset Inflation-Linked Income Fund,Financial,Closed-End Fund - Debt,2023-07-22,8.38
+71,SNY,2023-07-21,2023-07-22,2,54.95,52.48,-4.49,Sanofi,Healthcare,Drug Manufacturers - General,2023-07-22,53.92
+72,PEP,2023-07-21,2023-07-22,2,190.16,190.31,0.08,"PepsiCo, Inc.",Consumer Defensive,Beverages - Non-Alcoholic,2023-07-22,190.92
+73,BGRN,2023-07-21,2023-07-22,2,46.62,46.43,-0.41,iShares Global Green Bond ETF,Financial,Exchange Traded Fund,2023-07-22,46.5685
+74,CNET,2023-07-21,2023-07-22,2,1.35,1.38,2.22,ZW Data Action Technologies Inc.,Communication Services,Advertising Agencies,2023-07-22,1.38
+75,CSTR,2023-07-21,2023-07-22,2,13.82,14.61,5.72,"Capstar Financial Holdings, Inc.",Financial,Banks - Regional,2023-07-22,14.25
+76,ED,2023-07-21,2023-07-22,2,97.13,95.64,-1.53,"Consolidated Edison, Inc.",Utilities,Utilities - Regulated Electric,2023-07-22,97.13
+77,CDE,2023-07-21,2023-07-22,2,3.07,2.96,-3.58,"Coeur Mining, Inc.",Basic Materials,Gold,2023-07-22,3.14
+78,AMSF,2023-07-21,2023-07-22,2,54.31,52.78,-2.82,"AMERISAFE, Inc.",Financial,Insurance - Specialty,2023-07-22,54.9
