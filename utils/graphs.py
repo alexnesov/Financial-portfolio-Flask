@@ -80,6 +80,8 @@ def makeLinesSignal(tick):
 
     df = db_acc_obj.exc_query(db_name='signals', query=qu, \
     retres=QuRetType.ALLASPD)
+    
+    df = df.sort_values(by='Date', ascending=True)
 
     fig = make_subplots(rows=7, cols=1,
                         shared_xaxes=True,

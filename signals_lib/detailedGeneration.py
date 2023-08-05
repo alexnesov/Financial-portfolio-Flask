@@ -45,10 +45,6 @@ def SignalDetection(df: pd.DataFrame) -> pd.DataFrame:
     :returns: df with signals
     """
 
-    close               = df["Close"].to_numpy()
-    high                = df["High"].to_numpy()
-    low                 = df["Low"].to_numpy()
-
     # Aroon
     aroonUP, aroonDOWN = aroon(df, Aroonval)
     
@@ -125,9 +121,6 @@ def getsp500(DateSP='2020-01-01') -> pd.DataFrame:
     return sp500df
     
 
-
-
-
 def consolidateSignals(tick: str) -> pd.DataFrame:
     """
     Consolidates signals dataframe for a given stock ticker by fetching SP500 data, calculating percentage evolution,
@@ -149,6 +142,7 @@ def consolidateSignals(tick: str) -> pd.DataFrame:
 
     dfStock                             = SignalDetection(initialDF)
     dfStock[f'return_1D']               = dfStock.Close.pct_change()[1:] # YYYY-MM-DD
+    print(dfStock)
     dfStock.Date                        = pd.to_datetime(dfStock.Date)
     dfStock                             = pd.merge(dfStock, dfsp500, on='Date',how='inner')
     dfStock['diff_stock_bench']         = dfStock['return_1D'] - dfStock['returnSP500_1D']

@@ -35,7 +35,7 @@ class Prices:
 
         print(f'Ticker is in: {SE}. . .')
 
-        qu = f'SELECT * FROM marketdata.{SE}_20 Where Symbol = "{ticker}" and Date = "{date}"'
+        qu = f'SELECT * FROM marketdata.{SE}_15 Where Symbol = "{ticker}" and Date = "{date}"'
 
         res = db_acc_obj.exc_query(db_name='marketdata', 
                                    query=qu, 
@@ -93,4 +93,4 @@ class Prices:
 
 if __name__ == '__main__':
     provide = Prices()
-    provide.get_price("MSFT","2023-06-02")
+    provide.get_price("MSFT","2023-06-08")
