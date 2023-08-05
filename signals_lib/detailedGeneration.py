@@ -142,8 +142,12 @@ def consolidateSignals(tick: str) -> pd.DataFrame:
 
     dfStock                             = SignalDetection(initialDF)
     dfStock[f'return_1D']               = dfStock.Close.pct_change()[1:] # YYYY-MM-DD
+    
+    print("dfStock: ")
     print(dfStock)
     dfStock.Date                        = pd.to_datetime(dfStock.Date)
+    print("dfStock.Date: ")
+    print(dfStock.Date)
     dfStock                             = pd.merge(dfStock, dfsp500, on='Date',how='inner')
     dfStock['diff_stock_bench']         = dfStock['return_1D'] - dfStock['returnSP500_1D']
     dfStock[f'rolling_mean_{35}']       = dfStock['diff_stock_bench'].rolling(35).mean()

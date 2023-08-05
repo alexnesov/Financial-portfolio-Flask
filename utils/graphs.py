@@ -39,6 +39,9 @@ def TuplesToDF(items):
 
 def lineNBSignals(dfitems, spData):
 
+    print("spData")
+    print(spData)
+
     fig = make_subplots(specs=[[{"secondary_y": True}]])
 
     fig.add_trace(go.Scatter(x=dfitems.index, y=dfitems.iloc[:, 0],

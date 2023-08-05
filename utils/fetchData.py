@@ -24,6 +24,9 @@ class sp500evol:
         AND Date <='{self.spEND}'"
         self.sp500Data = db_acc_obj.exc_query(db_name='marketdata', query=self.quSP500Data, \
         retres=QuRetType.ALLASPD)
+        print("self.sp500Data")
+        print(self.sp500Data)
+        self.sp500Data = self.sp500Data.sort_values(by='Date',  ascending=True)
         
     
     def fetchSPEvol(self):
