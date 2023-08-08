@@ -46,6 +46,10 @@ def SignalDetection(df: pd.DataFrame) -> pd.DataFrame:
     """
 
     # Aroon
+    print("Raw df: ")
+    df.sort_values(by='Date', inplace=True)
+    print(df)
+
     aroonUP, aroonDOWN = aroon(df, Aroonval)
     
     # RSI
