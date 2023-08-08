@@ -36,6 +36,9 @@ def TuplesToDF(items):
     return df 
 
 
+import json
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
 
 def lineNBSignals(dfitems, spData):
 
@@ -54,11 +57,11 @@ def lineNBSignals(dfitems, spData):
 
     fig.update_traces(line_width=1.5)
     fig.update_layout(
-    title=f'Evolution of the number of signals over time',
-    plot_bgcolor='rgba(0,0,0,0)',
+        title=f'Evolution of the number of signals over time',
+        plot_bgcolor='rgba(0,0,0,0)',
+        autosize=True,  # Set autosize to True for responsive width
     )
-
-    fig.update_yaxes(showline=False, linewidth=1,gridwidth=0.2, linecolor='grey', gridcolor='rgba(192,192,192,0.5)')
+    fig.update_yaxes(showline=False, linewidth=1, gridwidth=0.2, linecolor='grey', gridcolor='rgba(192,192,192,0.5)')
     fig['layout']['yaxis2']['showgrid'] = False
 
     # Set y-axes titles

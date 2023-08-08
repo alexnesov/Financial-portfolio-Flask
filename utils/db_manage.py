@@ -53,6 +53,8 @@ class DBAccCM:
         self.db_pass = os.environ.get('aws_db_pass')
         self.db_user = os.environ.get('aws_db_user')
         self.db_endp = os.environ.get('aws_db_endpoint')
+
+        print("self.db_endp: ", self.db_endp)
         
     def __enter__(self):        
         """

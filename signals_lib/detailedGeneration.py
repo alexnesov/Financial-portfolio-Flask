@@ -116,6 +116,7 @@ def getsp500(DateSP='2020-01-01') -> pd.DataFrame:
                                                retres   = QuRetType.ALLASPD)
 
     sp500df.Date        = pd.to_datetime(sp500df.Date)
+    sp500df             = sp500df.sort_values(by='Date', ascending=True)
     sp500df             = sp500df.rename(columns={'Close':'Close_sp'})
 
     return sp500df
@@ -132,6 +133,9 @@ def consolidateSignals(tick: str) -> pd.DataFrame:
     #### SP500 data fetch + % evol 1D calculation"
     print('==> :INFO: Getting SP500 data from RDS to build the benchmark comparison. . .')
     dfsp500                             = getsp500() # YYYY-MM-DD
+
+    print(":INFO: dfsp500 from consolidateSignals(): ")
+    print(dfsp500)
     dfsp500['returnSP500_1D']           = dfsp500.Close_sp.pct_change()[1:]
     #### SP500 data fetch + % evol 1D calculation"
 
@@ -142,7 +146,6 @@ def consolidateSignals(tick: str) -> pd.DataFrame:
 
     dfStock                             = SignalDetection(initialDF)
     dfStock[f'return_1D']               = dfStock.Close.pct_change()[1:] # YYYY-MM-DD
-    
     print("dfStock: ")
     print(dfStock)
     dfStock.Date                        = pd.to_datetime(dfStock.Date)
@@ -157,3 +160,5 @@ def consolidateSignals(tick: str) -> pd.DataFrame:
     return dfStock
 
 
+if __name__ == '__main__':
+    pass

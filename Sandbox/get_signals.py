@@ -102,7 +102,6 @@ if __name__ == '__main__':
     df['SignalDate'] = pd.to_datetime(df['SignalDate'])
     df['ScanDate'] = pd.to_datetime(df['ScanDate'])
 
-    print(df)
     price_provider = Prices()
 
     df = add_days_to_df(df, "SignalDate", 1)
