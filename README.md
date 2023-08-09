@@ -1,8 +1,13 @@
 ![This package is currently under development.](https://img.shields.io/badge/under-development-orange.svg)
 
+This repository is under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (CC BY-NC-SA 4.0)
+
+
 Please contact alex@financial-portfolio.io for further information, for a demo or a collab.
 </br>
 
+
+### Tech Stack
 <ul>
 	<li>Deployment with AWS Beanstalk + Docker
 	<li>DB: AWS RDS MySQL
@@ -11,7 +16,7 @@ Please contact alex@financial-portfolio.io for further information, for a demo o
 </ul>
 <br>
 
-**What does it do?**  
+**What does FP do?**  
 - Connects to different market data API's. 
 - Gathers and analyses the data through proprietary algoirthms. 
 - Stores the raw data and results in remote AWS MySQL DB's.
