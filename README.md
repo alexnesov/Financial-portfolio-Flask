@@ -11,9 +11,10 @@ Please contact alex@financial-portfolio.io for further information, for a demo o
 </ul>
 <br>
 
-**What does it do?**
-Connects to different market data API's. Gathers and synthetizes the data. Will synthesize and display the competitive arenas for every chosen stock.
+**What does it do?**  
+Connects to different market data API's. Gathers and analyses the data through proprietary algoirthms. Stores the raw data and results in remote AWS MySQL DB's.
 The app integrates a user authentication procedure.
+The signals yielded by the previous algorithms are displayed through an own developed frontend.
 
 
 ![alt text](SV/static/dash.png)
