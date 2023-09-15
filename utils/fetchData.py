@@ -46,18 +46,13 @@ def fetchSignals(**kwargs):
     2. Calculates price evolution
     """
 
-    qu = "SELECT * FROM\
-        (SELECT Signals_aroon_crossing_evol.*, sectors.Company, sectors.Sector, sectors.Industry  \
-        FROM signals.Signals_aroon_crossing_evol\
-        LEFT JOIN marketdata.sectors \
-        ON sectors.Ticker = Signals_aroon_crossing_evol.ValidTick\
-        )t\
-    WHERE SignalDate>'2020-12-15' \
-    ORDER BY SignalDate DESC;"
+    qu = "SELECT * FROM ( SELECT Signals_aroon_crossing_evol.*, sectors.Company, sectors.Sector, sectors.Industry FROM signals.Signals_aroon_crossing_evol LEFT JOIN marketdata.sectors ON sectors.Ticker = Signals_aroon_crossing_evol.ValidTick) t WHERE SignalDate > '2020-12-15' AND Company IS NOT NULL ORDER BY SignalDate DESC;"
 
     
     items = db_acc_obj.exc_query(db_name='signals', query=qu, \
         retres=QuRetType.ALL)
+
+
 
 
     # checking if sql query is empty before starting pandas manipulation.
@@ -80,6 +75,8 @@ def fetchSignals(**kwargs):
 
         dfitems = dfitems.rename(columns=colNames)
 
+        print("----> dfitems[:500]")
+        print(dfitems[:500])
 
         PriceEvolution = dfitems['PriceEvolution'].tolist()
 
